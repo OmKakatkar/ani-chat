@@ -1,0 +1,22 @@
+.quiz-main {
+	height: calc(100vh - 10rem);
+}
+
+.hero-container {
+	width: 70rem;
+}
+
+.landing-links {
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.landing-links a:first-child {
+	color: var(--clr-brand-primary);
+	margin-bottom: 1rem;
+}
+
+.landing-links a:last-child {
+	color: var(--clr-brand-secondary);
+}

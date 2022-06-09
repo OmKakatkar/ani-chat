@@ -7,6 +7,7 @@ import MockAPI from "./frontend/mock/MockAPI";
 import { ToastContainer } from "react-toastify";
 import Feed from "./frontend/features/Feed/Feed";
 import SignUp from "./frontend/features/Auth/SignUp/SignUp";
+import Home from "./frontend/features/Home/Home";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />
 				<Route path="mock" element={<MockAPI />} />
+				<Route path="/" element={<Home />} />
 				<Route path="*" />
 			</Routes>
 			<ToastContainer autoClose={2000} />
