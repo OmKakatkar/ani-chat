@@ -23,9 +23,9 @@ function Login() {
 		setLoginData({ ...loginData, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(handleLogin(loginData));
+		await dispatch(handleLogin(loginData));
 		navigate("/feed");
 	};
 

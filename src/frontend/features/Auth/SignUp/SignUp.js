@@ -22,9 +22,9 @@ function SignUp() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(handleSignUp(signUpData));
+		await dispatch(handleSignUp(signUpData));
 		navigate("/feed");
 	};
 
