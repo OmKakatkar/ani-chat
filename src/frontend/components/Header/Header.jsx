@@ -1,12 +1,15 @@
-import {
-	faBars,
-	faClover,
-	faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faClover, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import { handleLogout } from "../../features/Auth/authSlice";
+
 import "./Header.css";
 function Header() {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	return (
 		<header className="header flex">
 			<div className="flex">
@@ -20,6 +23,15 @@ function Header() {
 				<input type="search" className="header-searchbar text-white" />
 				<button className="btn">
 					<FontAwesomeIcon icon={faSearch} className="text-white text-lg" />
+				</button>
+				<button
+					className="btn bg-green rounded"
+					onClick={() => {
+						dispatch(handleLogout());
+						navigate("/");
+					}}
+				>
+					Log Out
 				</button>
 			</div>
 			<NavLink to="/profile">

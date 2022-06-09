@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import Input from "../../../components/Input/Input";
 import { SIGNUP_DB } from "../../../constants/signup-form-data";
 import { TEST_USER_SIGNUP } from "../../../constants/test-user";
-import { useAuth } from "../../../context/auth-context";
+import { handleSignUp } from "../authSlice";
 
 import "../Auth.css";
 
@@ -12,18 +13,19 @@ function SignUp() {
 	const initialSignUpData = {
 		firstName: "",
 		lastName: "",
-		email: "",
+		username: "",
 		password: "",
 	};
-	const { handleSignUp } = useAuth();
 	const [signUpData, setSignUpData] = useState(initialSignUpData);
 	const [acceptTnC, setAcceptTnC] = useState(false);
-	const navigate = useNavigate();
 
-	const handleSubmit = async (e) => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		await handleSignUp(signUpData);
-		navigate("/");
+		dispatch(handleSignUp(signUpData));
+		navigate("/feed");
 	};
 
 	const handleChange = (e) => {
@@ -71,7 +73,7 @@ function SignUp() {
 						disabled={
 							!signUpData.firstName ||
 							!signUpData.lastName ||
-							!signUpData.email ||
+							!signUpData.username ||
 							!signUpData.password ||
 							!acceptTnC
 						}
