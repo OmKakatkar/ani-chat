@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_LOGIN, API_SIGNUP } from "../constants/api-constant";
+import { API_LOGIN, API_SIGNUP, API_USER_EDIT } from "../constants/api-constant";
 import { notify } from "../utils/notify";
 import { error, success } from "../constants/toast-constants";
 
@@ -54,5 +54,29 @@ export const signup = async ({ firstName, lastName, username, password }) => {
 			notify(error, "Internal Error");
 		}
 		return {};
+	}
+};
+
+/**
+ * Login the user if username and password are correct
+ * @return user
+ */
+ export const updateProfile = async ({ userData, token }) => {
+	try {
+		const { data } = await axios.post(
+			API_USER_EDIT,
+			{
+				userData,
+			},
+			{
+				headers: {
+					authorization: token,
+				},
+			}
+		);
+		notify(success, "Profile Updated");
+		return data;
+	} catch (err) {
+		console.error(err);
 	}
 };
