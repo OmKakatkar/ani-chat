@@ -1,0 +1,11 @@
+.user-card {
+	display: flex;
+	align-items: center;
+}
+
+.user-follow {
+	margin-left: 1rem;
+	color: var(--clr-brand-secondary);
+	border: 1px solid var(--clr-primary-contrast);
+	padding: var(--padding-1r);
+}

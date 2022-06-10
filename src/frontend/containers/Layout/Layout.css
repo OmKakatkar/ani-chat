@@ -1,5 +1,6 @@
 .main-container {
 	margin-left: var(--width-sidebar);
+	margin-right: var(--width-sidebar);
 	margin-top: var(--height-header);
 }
 

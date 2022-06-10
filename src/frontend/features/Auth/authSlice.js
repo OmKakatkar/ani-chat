@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login, signup } from "../../services/auth.service";
+import { login, signup, updateProfile } from "../../services/auth.service";
 
 const currentUser = "ANICHAT_USER";
 const currentToken = "ANICHAT_TOKEN";
 const initialState = {
-	user: JSON.parse(localStorage.getItem("ANICHAT_USER")) || {},
-	token: JSON.parse(localStorage.getItem("ANICHAT_USER")) || "",
+	user: JSON.parse(localStorage.getItem(currentUser)) || {},
+	token: localStorage.getItem(currentToken) || "",
 };
 
 export const handleLogin = createAsyncThunk(
@@ -40,6 +40,18 @@ export const handleSignUp = createAsyncThunk(
 	}
 );
 
+export const handleProfileUpdate = createAsyncThunk(
+	"auth/handleProfileUpdate",
+	async ({ userData, token }) => {
+		try {
+			const { user } = await updateProfile({ userData, token });
+			return { user };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
@@ -56,7 +68,15 @@ const authSlice = createSlice({
 			state.user = action.payload.user;
 			state.token = action.payload.token;
 			delete action.payload.user.password;
-			localStorage.setItem(currentUser, JSON.stringify(action.payload.user));
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+					bookmarks: [],
+				})
+			);
 			localStorage.setItem(currentToken, action.payload.token);
 		});
 
@@ -64,8 +84,29 @@ const authSlice = createSlice({
 			state.user = action.payload.user;
 			state.token = action.payload.token;
 			delete action.payload.user.password;
-			localStorage.setItem(currentUser, JSON.stringify(action.payload.user));
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+					bookmarks: [],
+				})
+			);
 			localStorage.setItem(currentToken, action.payload.token);
+		});
+		builder.addCase(handleProfileUpdate.fulfilled, (state, action) => {
+			state.user = action.payload.user;
+			delete action.payload.user.password;
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+					bookmarks: [],
+				})
+			);
 		});
 	},
 });

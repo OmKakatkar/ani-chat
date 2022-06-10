@@ -1,0 +1,9 @@
+.profile-edit {
+	position: fixed;
+	color: var(--white);
+	border: 1px solid var(--clr-primary-contrast);
+	padding: var(--padding-1r);
+	z-index: 1;
+	border-radius: 10px;
+	background-color: var(--clr-brand-secondary);
+}
