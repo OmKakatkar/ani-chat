@@ -5,7 +5,7 @@ const currentUser = "ANICHAT_USER";
 const currentToken = "ANICHAT_TOKEN";
 const initialState = {
 	user: JSON.parse(localStorage.getItem(currentUser)) || {},
-	token: JSON.parse(localStorage.getItem(currentToken)) || "",
+	token: localStorage.getItem(currentToken) || "",
 };
 
 export const handleLogin = createAsyncThunk(
@@ -68,7 +68,15 @@ const authSlice = createSlice({
 			state.user = action.payload.user;
 			state.token = action.payload.token;
 			delete action.payload.user.password;
-			localStorage.setItem(currentUser, JSON.stringify(action.payload.user));
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+					bookmarks: [],
+				})
+			);
 			localStorage.setItem(currentToken, action.payload.token);
 		});
 
@@ -76,13 +84,29 @@ const authSlice = createSlice({
 			state.user = action.payload.user;
 			state.token = action.payload.token;
 			delete action.payload.user.password;
-			localStorage.setItem(currentUser, JSON.stringify(action.payload.user));
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+					bookmarks: [],
+				})
+			);
 			localStorage.setItem(currentToken, action.payload.token);
 		});
 		builder.addCase(handleProfileUpdate.fulfilled, (state, action) => {
 			state.user = action.payload.user;
 			delete action.payload.user.password;
-			localStorage.setItem(currentUser, JSON.stringify(action.payload.user));
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+					bookmarks: [],
+				})
+			);
 		});
 	},
 });
