@@ -16,7 +16,19 @@ export const createPost = async ({ postData, token }) => {
 				},
 			}
 		);
-		console.log(data.posts);
+		return data;
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+/**
+ * Get all posts
+ * @return allPosts
+ */
+export const getAllPosts = async () => {
+	try {
+		const { data } = await axios.get(API_POST);
 		return data;
 	} catch (err) {
 		console.error(err);

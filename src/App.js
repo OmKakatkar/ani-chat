@@ -5,11 +5,12 @@ import PrivateRoute from "./frontend/components/PrivateRoute/PrivateRoute";
 import Login from "./frontend/features/Auth/Login/Login";
 import MockAPI from "./frontend/mock/MockAPI";
 import { ToastContainer } from "react-toastify";
-import Feed from "./frontend/features/Feed/Feed";
+import Feed from "./frontend/containers/Feed/Feed";
 import SignUp from "./frontend/features/Auth/SignUp/SignUp";
 import Home from "./frontend/features/Home/Home";
 import Profile from "./frontend/features/Profile/Profile";
 import Post from "./frontend/features/Post/Post";
+import NewPosts from "./frontend/components/NewPosts/NewPosts";
 
 function App() {
 	return (
@@ -22,7 +23,10 @@ function App() {
 						</PrivateRoute>
 					}
 				>
-					<Route path="/feed" element={<Feed />} />
+					<Route path="/feed" element={<Feed />}>
+						<Route index element={<NewPosts />} />
+						<Route path="new" element={<NewPosts />} />
+					</Route>
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/new-post" element={<Post />} />
 				</Route>
