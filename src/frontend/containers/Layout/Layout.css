@@ -2,6 +2,7 @@
 	margin-left: var(--width-sidebar);
 	margin-right: var(--width-sidebar);
 	margin-top: var(--height-header);
+	min-width: calc(100% - 2 * var(--width-sidebar));
 }
 
 .main-container-body {

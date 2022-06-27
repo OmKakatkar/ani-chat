@@ -1,8 +1,5 @@
 .tab {
-	margin-top: var(--height-header);
-	margin-left: var(--width-sidebar);
-	margin-right: var(--width-sidebar);
-	min-width: calc(100% - 2 * var(--width-sidebar));
+	width: 100%;
 	height: var(--height-header);
 	padding: var(--padding-2r);
 	display: flex;
