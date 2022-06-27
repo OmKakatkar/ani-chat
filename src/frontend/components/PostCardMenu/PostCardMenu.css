@@ -1,0 +1,14 @@
+.menu-button {
+	color: var(--clr-primary-contrast);
+	padding: var(--padding-1r-2r);
+	align-self: flex-start;
+}
+
+.menu-button:hover {
+	color: var(--clr-brand-primary);
+}
+
+.menu-button span {
+	display: inline-block;
+	margin-left: 1rem;
+}

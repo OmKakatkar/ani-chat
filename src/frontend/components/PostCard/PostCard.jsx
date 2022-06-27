@@ -3,14 +3,22 @@ import {
 	faComment,
 	faHeart,
 } from "@fortawesome/free-regular-svg-icons";
-import { faShareNodes, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import {
+	faShareNodes,
+	faEllipsisVertical,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useDetectClickOutside from "../../hooks/useDetectClickOutside";
+import ModalCard from "../ModalCard/ModalCard";
+import PostCardMenu from "../PostCardMenu/PostCardMenu";
 import "./PostCard.css";
 
 function PostCard({ post }) {
+	const { triggerRef, nodeRef, showItem } = useDetectClickOutside();
+
 	return (
 		<article className="card post-card">
-			<button>
+			<button ref={triggerRef}>
 				<FontAwesomeIcon icon={faEllipsisVertical} className="icon card-menu" />
 			</button>
 			<div className="card-body">
@@ -39,6 +47,11 @@ function PostCard({ post }) {
 					</button>
 				</div>
 			</div>
+			{showItem && (
+				<ModalCard ref={nodeRef} position="top-right">
+					<PostCardMenu />
+				</ModalCard>
+			)}
 		</article>
 	);
 }

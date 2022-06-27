@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
 import "./ModalCard.css";
 
-const ModalCard = forwardRef(({ children }, ref) => {
+const ModalCard = forwardRef(({ position = "", children }, ref) => {
 	return (
-		<div className="modal-card text-white" ref={ref}>
+		<div className={`modal-card text-white ${position}`} ref={ref}>
 			{children}
 		</div>
 	);
