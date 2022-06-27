@@ -9,6 +9,7 @@ import Feed from "./frontend/features/Feed/Feed";
 import SignUp from "./frontend/features/Auth/SignUp/SignUp";
 import Home from "./frontend/features/Home/Home";
 import Profile from "./frontend/features/Profile/Profile";
+import Post from "./frontend/features/Post/Post";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 				>
 					<Route path="/feed" element={<Feed />} />
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/new-post" element={<Post />} />
 				</Route>
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />
