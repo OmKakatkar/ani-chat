@@ -34,3 +34,20 @@ export const getAllPosts = async () => {
 		console.error(err);
 	}
 };
+
+/**
+ * Delete post
+ * @return allPosts
+ */
+export const deletePost = async ({ postId, token }) => {
+	try {
+		const { data } = await axios.delete(`${API_POST}/${postId}`, {
+			headers: {
+				authorization: token,
+			},
+		});
+		return data;
+	} catch (err) {
+		console.error(err);
+	}
+};

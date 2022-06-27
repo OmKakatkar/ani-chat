@@ -8,19 +8,26 @@ import {
 	faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 import useDetectClickOutside from "../../hooks/useDetectClickOutside";
 import ModalCard from "../ModalCard/ModalCard";
 import PostCardMenu from "../PostCardMenu/PostCardMenu";
 import "./PostCard.css";
 
 function PostCard({ post }) {
+	const { user } = useSelector((store) => store.auth);
 	const { triggerRef, nodeRef, showItem } = useDetectClickOutside();
 
 	return (
 		<article className="card post-card">
-			<button ref={triggerRef}>
-				<FontAwesomeIcon icon={faEllipsisVertical} className="icon card-menu" />
-			</button>
+			{post.username === user.username && (
+				<button ref={triggerRef}>
+					<FontAwesomeIcon
+						icon={faEllipsisVertical}
+						className="icon card-menu"
+					/>
+				</button>
+			)}
 			<div className="card-body">
 				<div className="user-info">
 					<div className="avatar">
@@ -49,7 +56,7 @@ function PostCard({ post }) {
 			</div>
 			{showItem && (
 				<ModalCard ref={nodeRef} position="top-right">
-					<PostCardMenu />
+					<PostCardMenu postId={post._id} />
 				</ModalCard>
 			)}
 		</article>
