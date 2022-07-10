@@ -13,7 +13,6 @@ function NewPosts() {
 		}
 	}, [allPosts.length, dispatch]);
 
-	console.log(allPosts);
 	return (
 		<>
 			{allPosts.length &&

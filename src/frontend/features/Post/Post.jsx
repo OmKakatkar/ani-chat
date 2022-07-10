@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { handleCreatePost } from "./postSlice";
+import { handleCreatePost, handleEditPost } from "./postSlice";
 import { useState } from "react";
 
 function Post() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { token } = useSelector((store) => store.auth);
+	const { modalData } = useSelector((store) => store.postModal);
 	const [postData, setPostData] = useState({
-		content: "",
+		content: modalData?.content || "",
 	});
 
 	const handleChange = (e) => {
@@ -17,7 +18,13 @@ function Post() {
 
 	const handlePostSubmit = async (e) => {
 		e.preventDefault();
-		await dispatch(handleCreatePost({ postData, token }));
+		if (modalData === null) {
+			await dispatch(handleCreatePost({ postData, token }));
+		} else {
+			await dispatch(
+				handleEditPost({ postData: { ...modalData, ...postData }, token })
+			);
+		}
 		navigate("/feed");
 	};
 

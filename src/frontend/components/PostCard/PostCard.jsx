@@ -56,7 +56,7 @@ function PostCard({ post }) {
 			</div>
 			{showItem && (
 				<ModalCard ref={nodeRef} position="top-right">
-					<PostCardMenu postId={post._id} />
+					<PostCardMenu post={post} />
 				</ModalCard>
 			)}
 		</article>

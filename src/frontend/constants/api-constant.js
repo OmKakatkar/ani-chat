@@ -6,3 +6,4 @@ export const API_FOLLOW = "/api/users/follow";
 export const API_UNFOLLOW = "/api/users/unfollow";
 export const API_POST = "/api/posts";
 export const API_USER_POST = "/api/posts/user";
+export const API_POST_EDIT = "/api/posts/edit";
