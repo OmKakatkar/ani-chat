@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 // Custom Hook that Detects click outside a component.
 // Takes an initial state for the item (Shown or Hidden Visually)
@@ -6,13 +6,13 @@ import { useEffect, useRef, useState } from 'react';
 //           setter function,
 //           nodeRef for referencing the node to keep track,
 //           triggerRef to reference the node that triggers the state
-function useDetectClickOutside(initialState) {
+function useDetectClickOutside(initialState, handler = () => {}) {
 	const nodeRef = useRef(null);
 	const triggerRef = useRef(null);
 
 	const [showItem, setShowItem] = useState(initialState);
 
-	const handleClickOutside = e => {
+	const handleClickOutside = (e) => {
 		// If click is on trigger(can be a button), toggle item
 		if (triggerRef.current && triggerRef.current.contains(e.target)) {
 			return setShowItem(!showItem);
@@ -20,14 +20,15 @@ function useDetectClickOutside(initialState) {
 
 		// If item is open and click is outside of item, close item
 		if (nodeRef.current && !nodeRef.current.contains(e.target)) {
+			handler();
 			return setShowItem(false);
 		}
 	};
 
 	useEffect(() => {
-		document.addEventListener('click', handleClickOutside, true);
+		document.addEventListener("click", handleClickOutside, true);
 		return () => {
-			document.removeEventListener('click', handleClickOutside, true);
+			document.removeEventListener("click", handleClickOutside, true);
 		};
 	});
 
@@ -35,7 +36,7 @@ function useDetectClickOutside(initialState) {
 		triggerRef,
 		nodeRef,
 		showItem,
-		setShowItem
+		setShowItem,
 	};
 }
 export default useDetectClickOutside;

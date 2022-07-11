@@ -28,7 +28,6 @@ function App() {
 						<Route path="new" element={<NewPosts />} />
 					</Route>
 					<Route path="/profile" element={<Profile />} />
-					<Route path="/new-post" element={<Post />} />
 				</Route>
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />
@@ -36,6 +35,7 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="*" />
 			</Routes>
+			<Post />
 			<ToastContainer autoClose={2000} />
 		</div>
 	);

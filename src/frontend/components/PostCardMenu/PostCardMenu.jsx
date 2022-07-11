@@ -5,12 +5,10 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./PostCardMenu.css";
 import { handleDeletePost } from "../../features/Post/postSlice";
 import { openPostModal } from "../../features/Post/postModalSlice";
-import { useNavigate } from "react-router-dom";
 
 function PostCardMenu({ post }) {
 	const { token } = useSelector((store) => store.auth);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	return (
 		<div className="menu-wrapper flex-column">
@@ -18,7 +16,6 @@ function PostCardMenu({ post }) {
 				className="menu-button"
 				onClick={() => {
 					dispatch(openPostModal({ modalData: post }));
-					navigate("/new-post");
 				}}
 			>
 				<FontAwesomeIcon icon={faEdit} />

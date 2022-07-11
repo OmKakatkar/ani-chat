@@ -4,10 +4,14 @@ import {
 	faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { openPostModal } from "../../features/Post/postModalSlice";
 import "./SideBar.css";
 
 function SideBarLeft() {
+	const dispatch = useDispatch();
+
 	return (
 		<div className="sidebar sidebar-left">
 			<div className="sidebar-spacer"></div>
@@ -21,10 +25,13 @@ function SideBarLeft() {
 							</NavLink>
 						</li>
 						<li className="sidebar-list-item">
-							<NavLink to="/new-post" className="sidebar-item-link text-white">
+							<button
+								className="sidebar-item-link text-white"
+								onClick={() => dispatch(openPostModal({ modalData: null }))}
+							>
 								<FontAwesomeIcon icon={faTrashAlt} className="text-lg" />
 								<span>Create Post</span>
-							</NavLink>
+							</button>
 						</li>
 						<li className="sidebar-list-item">
 							<NavLink to="/bookmarks" className="sidebar-item-link text-white">
