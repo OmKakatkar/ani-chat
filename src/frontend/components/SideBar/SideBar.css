@@ -1,6 +1,7 @@
 .sidebar {
 	height: 100vh;
-	min-width: var(--width-sidebar);
+	max-width: var(--width-sidebar);
+	width: var(--width-sidebar);
 	display: flex;
 	flex-direction: column;
 	position: fixed;
@@ -66,4 +67,9 @@
 .sidebar-item-link span {
 	display: inline-block;
 	margin-left: 1.5rem;
+}
+
+.icon-container {
+	display: inline-block;
+	width: 20px;
 }

@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import ModalCard from "../../components/ModalCard/ModalCard";
 import ProfileUpdate from "../../components/ProfileUpdate/ProfileUpdate";
 import useDetectClickOutside from "../../hooks/useDetectClickOutside";
@@ -31,9 +30,14 @@ function Profile() {
 			</div>
 			<div className="text-center">
 				<span>Site :</span>
-				<Link to={user.site} className="text-green">
+				<a
+					href={user.site}
+					rel="noreferrer"
+					target="_blank"
+					className="text-green"
+				>
 					{user.site}
-				</Link>
+				</a>
 			</div>
 			<div className="text-center">
 				<span>Bio :</span>

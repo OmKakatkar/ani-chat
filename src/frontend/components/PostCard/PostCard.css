@@ -1,0 +1,31 @@
+.post-card {
+	min-width: 70%;
+	margin: 2rem auto;
+	background-color: var(--clr-secondary-background);
+	position: relative;
+}
+
+.post-card .card-body {
+	padding: 2rem;
+}
+
+.card-body p {
+	max-width: 80ch;
+	line-height: 1.25;
+}
+
+.card-buttons {
+	display: flex;
+	justify-content: space-around;
+}
+
+.card .icon {
+	font-size: var(--fs-h5);
+	color: var(--clr-primary-contrast);
+}
+
+.card-menu {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
