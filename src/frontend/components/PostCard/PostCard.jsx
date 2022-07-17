@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
+import { success } from "../../constants/toast-constants";
 import {
 	handleAddBookmark,
 	handleRemoveBookmark,
@@ -20,6 +21,7 @@ import {
 	handleUnlikePost,
 } from "../../features/Post/postSlice";
 import useDetectClickOutside from "../../hooks/useDetectClickOutside";
+import { notify } from "../../utils/notify";
 import { checkItemInArray } from "../../utils/util";
 import ModalCard from "../ModalCard/ModalCard";
 import PostCardMenu from "../PostCardMenu/PostCardMenu";
@@ -100,7 +102,14 @@ function PostCard({ post }) {
 					<button>
 						<FontAwesomeIcon icon={faComment} className="icon" />
 					</button>
-					<button>
+					<button
+						onClick={() => {
+							navigator.clipboard.writeText(
+								`https://ani-chat.netlify.app/post/${post._id}`
+							);
+							notify(success, 'Link Copied!')
+						}}
+					>
 						<FontAwesomeIcon icon={faShareNodes} className="icon" />
 					</button>
 				</div>
