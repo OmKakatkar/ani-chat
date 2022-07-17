@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { login, signup, updateProfile } from "../../services/auth.service";
-import { addBookmark, removeBookmark } from "../../services/bookmark.service";
+import {
+	addBookmark,
+	getAllBookmarks,
+	removeBookmark,
+} from "../../services/bookmark.service";
 
 const currentUser = "ANICHAT_USER";
 const currentToken = "ANICHAT_TOKEN";
@@ -78,6 +82,18 @@ export const handleRemoveBookmark = createAsyncThunk(
 	}
 );
 
+export const handleGetAllBookmarks = createAsyncThunk(
+	"users/handleGetAllBookmarks",
+	async ({ token }) => {
+		try {
+			const { bookmarks } = await getAllBookmarks({ token });
+			return { bookmarks };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
@@ -146,6 +162,18 @@ const authSlice = createSlice({
 		});
 
 		builder.addCase(handleRemoveBookmark.fulfilled, (state, action) => {
+			state.user.bookmarks = action.payload.bookmarks;
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+				})
+			);
+		});
+
+		builder.addCase(handleGetAllBookmarks.fulfilled, (state, action) => {
 			state.user.bookmarks = action.payload.bookmarks;
 			localStorage.setItem(
 				currentUser,

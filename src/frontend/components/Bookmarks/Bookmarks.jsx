@@ -1,19 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetAllPosts } from "../../features/Post/postSlice";
+import { getUnionArraysOfObjects } from "../../utils/util";
 import PostCard from "../PostCard/PostCard";
 
 function Bookmarks() {
 	const { user } = useSelector((store) => store.auth);
-	const allBookmarks = user.bookmarks || [];
+	const { allPosts } = useSelector((store) => store.post);
 
-	const dispatch = useDispatch();
-	useEffect(() => {
-		if (!allBookmarks.length) {
-			dispatch(handleGetAllPosts());
-		}
-	}, [allBookmarks.length, dispatch]);
-	console.log(allBookmarks);
+	const allBookmarks = getUnionArraysOfObjects(allPosts, user.bookmarks) || [];
+	console.log(getUnionArraysOfObjects(allPosts, user.bookmarks))
 
 	return (
 		<>

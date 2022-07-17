@@ -1,4 +1,13 @@
-const checkItemInArray = (arr = [], item) =>
+export const checkItemInArray = (arr = [], item) =>
 	Boolean(arr.filter((arrItem) => arrItem._id === item._id).length);
 
-export { checkItemInArray };
+export const getUnionArraysOfObjects = (
+	mainArray,
+	checkArray,
+	predicate = "_id"
+) =>
+	mainArray.filter(({ [predicate]: mainArrayItem }) =>
+		checkArray.some(
+			({ [predicate]: checkArrayItem }) => mainArrayItem === checkArrayItem
+		)
+	);
