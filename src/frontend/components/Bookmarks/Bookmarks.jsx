@@ -7,7 +7,6 @@ function Bookmarks() {
 	const { allPosts } = useSelector((store) => store.post);
 
 	const allBookmarks = getUnionArraysOfObjects(allPosts, user.bookmarks) || [];
-	console.log(getUnionArraysOfObjects(allPosts, user.bookmarks))
 
 	return (
 		<>
