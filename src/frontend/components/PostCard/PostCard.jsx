@@ -6,17 +6,33 @@ import {
 import {
 	faShareNodes,
 	faEllipsisVertical,
+	faBookmark as faSolidBookmark,
+	faHeart as faSolidHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { success } from "../../constants/toast-constants";
+import {
+	handleAddBookmark,
+	handleRemoveBookmark,
+} from "../../features/Auth/authSlice";
+import {
+	handleLikePost,
+	handleUnlikePost,
+} from "../../features/Post/postSlice";
 import useDetectClickOutside from "../../hooks/useDetectClickOutside";
+import { notify } from "../../utils/notify";
+import { checkItemInArray } from "../../utils/util";
 import ModalCard from "../ModalCard/ModalCard";
 import PostCardMenu from "../PostCardMenu/PostCardMenu";
 import "./PostCard.css";
 
 function PostCard({ post }) {
-	const { user } = useSelector((store) => store.auth);
+	const dispatch = useDispatch();
+	const { user, token } = useSelector((store) => store.auth);
 	const { triggerRef, nodeRef, showItem } = useDetectClickOutside();
+	const isBookMark = checkItemInArray(user.bookmarks, post);
+	const isLiked = checkItemInArray(post.likes.likedBy, user);
 
 	return (
 		<article className="card post-card">
@@ -40,16 +56,60 @@ function PostCard({ post }) {
 				</div>
 				<p className="text-white">{post.content}</p>
 				<div className="card-buttons">
-					<button>
-						<FontAwesomeIcon icon={faHeart} className="icon" />
-					</button>
-					<button>
-						<FontAwesomeIcon icon={faBookmark} className="icon" />
-					</button>
+					<span className="button-wrapper">
+						{isLiked ? (
+							<button
+								onClick={() =>
+									dispatch(handleUnlikePost({ postId: post._id, token }))
+								}
+							>
+								<FontAwesomeIcon
+									icon={faSolidHeart}
+									className="icon icon-active"
+								/>
+							</button>
+						) : (
+							<button
+								onClick={() =>
+									dispatch(handleLikePost({ postId: post._id, token }))
+								}
+							>
+								<FontAwesomeIcon icon={faHeart} className="icon" />
+							</button>
+						)}
+						<small className="text-white">{post.likes.likeCount}</small>
+					</span>
+					{isBookMark ? (
+						<button
+							onClick={() =>
+								dispatch(handleRemoveBookmark({ postId: post._id, token }))
+							}
+						>
+							<FontAwesomeIcon
+								icon={faSolidBookmark}
+								className="icon icon-active"
+							/>
+						</button>
+					) : (
+						<button
+							onClick={() =>
+								dispatch(handleAddBookmark({ postId: post._id, token }))
+							}
+						>
+							<FontAwesomeIcon icon={faBookmark} className="icon" />
+						</button>
+					)}
 					<button>
 						<FontAwesomeIcon icon={faComment} className="icon" />
 					</button>
-					<button>
+					<button
+						onClick={() => {
+							navigator.clipboard.writeText(
+								`https://ani-chat.netlify.app/post/${post._id}`
+							);
+							notify(success, 'Link Copied!')
+						}}
+					>
 						<FontAwesomeIcon icon={faShareNodes} className="icon" />
 					</button>
 				</div>

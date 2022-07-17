@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { addLike, removeLike } from "../../services/like.service";
 import {
 	createPost,
 	deletePost,
@@ -11,6 +12,7 @@ const initialState = {
 	userPosts: [],
 };
 
+// Post CRUD
 export const handleCreatePost = createAsyncThunk(
 	"users/handleCreatePost",
 	async ({ postData, token }) => {
@@ -59,6 +61,31 @@ export const handleEditPost = createAsyncThunk(
 	}
 );
 
+// Likes
+export const handleLikePost = createAsyncThunk(
+	"users/handleLikePost",
+	async ({ postId, token }) => {
+		try {
+			const { posts } = await addLike({ postId, token });
+			return posts;
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
+export const handleUnlikePost = createAsyncThunk(
+	"users/handleUnlikePost",
+	async ({ postId, token }) => {
+		try {
+			const { posts } = await removeLike({ postId, token });
+			return posts;
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
 const postSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -67,13 +94,24 @@ const postSlice = createSlice({
 		builder.addCase(handleCreatePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
 		});
+
 		builder.addCase(handleGetAllPosts.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
 		});
+
 		builder.addCase(handleDeletePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
 		});
+
 		builder.addCase(handleEditPost.fulfilled, (state, action) => {
+			state.allPosts = action.payload;
+		});
+
+		builder.addCase(handleLikePost.fulfilled, (state, action) => {
+			state.allPosts = action.payload;
+		});
+
+		builder.addCase(handleUnlikePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
 		});
 	},

@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { login, signup, updateProfile } from "../../services/auth.service";
+import {
+	addBookmark,
+	getAllBookmarks,
+	removeBookmark,
+} from "../../services/bookmark.service";
 
 const currentUser = "ANICHAT_USER";
 const currentToken = "ANICHAT_TOKEN";
@@ -52,6 +57,43 @@ export const handleProfileUpdate = createAsyncThunk(
 	}
 );
 
+// Bookmarks
+export const handleAddBookmark = createAsyncThunk(
+	"users/handleAddBookmark",
+	async ({ postId, token }) => {
+		try {
+			const { bookmarks } = await addBookmark({ postId, token });
+			return { bookmarks };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
+export const handleRemoveBookmark = createAsyncThunk(
+	"users/handleRemoveBookmark",
+	async ({ postId, token }) => {
+		try {
+			const { bookmarks } = await removeBookmark({ postId, token });
+			return { bookmarks };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
+export const handleGetAllBookmarks = createAsyncThunk(
+	"users/handleGetAllBookmarks",
+	async ({ token }) => {
+		try {
+			const { bookmarks } = await getAllBookmarks({ token });
+			return { bookmarks };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
@@ -74,7 +116,6 @@ const authSlice = createSlice({
 					...action.payload.user,
 					followers: [],
 					following: [],
-					bookmarks: [],
 				})
 			);
 			localStorage.setItem(currentToken, action.payload.token);
@@ -90,11 +131,11 @@ const authSlice = createSlice({
 					...action.payload.user,
 					followers: [],
 					following: [],
-					bookmarks: [],
 				})
 			);
 			localStorage.setItem(currentToken, action.payload.token);
 		});
+
 		builder.addCase(handleProfileUpdate.fulfilled, (state, action) => {
 			state.user = action.payload.user;
 			delete action.payload.user.password;
@@ -104,7 +145,42 @@ const authSlice = createSlice({
 					...action.payload.user,
 					followers: [],
 					following: [],
-					bookmarks: [],
+				})
+			);
+		});
+
+		builder.addCase(handleAddBookmark.fulfilled, (state, action) => {
+			state.user.bookmarks = action.payload.bookmarks;
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+				})
+			);
+		});
+
+		builder.addCase(handleRemoveBookmark.fulfilled, (state, action) => {
+			state.user.bookmarks = action.payload.bookmarks;
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
+				})
+			);
+		});
+
+		builder.addCase(handleGetAllBookmarks.fulfilled, (state, action) => {
+			state.user.bookmarks = action.payload.bookmarks;
+			localStorage.setItem(
+				currentUser,
+				JSON.stringify({
+					...action.payload.user,
+					followers: [],
+					following: [],
 				})
 			);
 		});

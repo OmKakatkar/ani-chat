@@ -11,6 +11,7 @@ import Home from "./frontend/features/Home/Home";
 import Profile from "./frontend/features/Profile/Profile";
 import Post from "./frontend/features/Post/Post";
 import NewPosts from "./frontend/components/NewPosts/NewPosts";
+import Bookmarks from "./frontend/components/Bookmarks/Bookmarks";
 
 function App() {
 	return (
@@ -26,6 +27,9 @@ function App() {
 					<Route path="/feed" element={<Feed />}>
 						<Route index element={<NewPosts />} />
 						<Route path="new" element={<NewPosts />} />
+					</Route>
+					<Route element={<Feed />}>
+						<Route path="/bookmarks" element={<Bookmarks />} />
 					</Route>
 					<Route path="/profile" element={<Profile />} />
 				</Route>
