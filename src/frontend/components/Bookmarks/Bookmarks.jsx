@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { handleGetAllPosts } from "../../features/Post/postSlice";
+import { useSelector } from "react-redux";
 import { getUnionArraysOfObjects } from "../../utils/util";
 import PostCard from "../PostCard/PostCard";
 
