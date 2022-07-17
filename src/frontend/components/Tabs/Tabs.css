@@ -1,10 +1,15 @@
 .tab {
-	width: 100%;
+	position: fixed;
+	top: var(--height-header);
+	left: var(--width-sidebar);
+	z-index: 1;
+	width: calc(100% - 2 * var(--width-sidebar));
 	height: var(--height-header);
 	padding: var(--padding-2r);
 	display: flex;
 	justify-content: space-around;
 	border-bottom: 1px solid var(--clr-secondary-background-lighter);
+	background-color: var(--clr-primary-background);
 }
 
 .tab li {
