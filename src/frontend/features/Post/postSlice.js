@@ -11,6 +11,7 @@ const initialState = {
 	userPosts: [],
 };
 
+// Post CRUD
 export const handleCreatePost = createAsyncThunk(
 	"users/handleCreatePost",
 	async ({ postData, token }) => {

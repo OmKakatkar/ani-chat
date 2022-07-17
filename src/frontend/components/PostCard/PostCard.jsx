@@ -6,17 +6,25 @@ import {
 import {
 	faShareNodes,
 	faEllipsisVertical,
+	faBookmark as faSolidBookmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	handleAddBookmark,
+	handleRemoveBookmark,
+} from "../../features/Auth/authSlice";
 import useDetectClickOutside from "../../hooks/useDetectClickOutside";
+import { checkItemInArray } from "../../utils/util";
 import ModalCard from "../ModalCard/ModalCard";
 import PostCardMenu from "../PostCardMenu/PostCardMenu";
 import "./PostCard.css";
 
 function PostCard({ post }) {
-	const { user } = useSelector((store) => store.auth);
+	const dispatch = useDispatch();
+	const { user, token } = useSelector((store) => store.auth);
 	const { triggerRef, nodeRef, showItem } = useDetectClickOutside();
+	const isBookMark = checkItemInArray(user.bookmarks, post);
 
 	return (
 		<article className="card post-card">
@@ -43,9 +51,26 @@ function PostCard({ post }) {
 					<button>
 						<FontAwesomeIcon icon={faHeart} className="icon" />
 					</button>
-					<button>
-						<FontAwesomeIcon icon={faBookmark} className="icon" />
-					</button>
+					{isBookMark ? (
+						<button
+							onClick={() =>
+								dispatch(handleRemoveBookmark({ postId: post._id, token }))
+							}
+						>
+							<FontAwesomeIcon
+								icon={faSolidBookmark}
+								className="icon icon-active"
+							/>
+						</button>
+					) : (
+						<button
+							onClick={() =>
+								dispatch(handleAddBookmark({ postId: post._id, token }))
+							}
+						>
+							<FontAwesomeIcon icon={faBookmark} className="icon" />
+						</button>
+					)}
 					<button>
 						<FontAwesomeIcon icon={faComment} className="icon" />
 					</button>
