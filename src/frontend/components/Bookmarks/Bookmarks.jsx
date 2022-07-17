@@ -5,7 +5,7 @@ import PostCard from "../PostCard/PostCard";
 
 function Bookmarks() {
 	const { user } = useSelector((store) => store.auth);
-	const allBookmarks = user.bookmarks;
+	const allBookmarks = user.bookmarks || [];
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -13,6 +13,7 @@ function Bookmarks() {
 			dispatch(handleGetAllPosts());
 		}
 	}, [allBookmarks.length, dispatch]);
+	console.log(allBookmarks);
 
 	return (
 		<>
