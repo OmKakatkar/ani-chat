@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { addComment } from "../../services/comment.service";
 import { addLike, removeLike } from "../../services/like.service";
 import {
 	createPost,
@@ -86,6 +87,19 @@ export const handleUnlikePost = createAsyncThunk(
 	}
 );
 
+// Comments
+export const handleAddComment = createAsyncThunk(
+	"users/handleAddComment",
+	async ({ postId, commentData, token }) => {
+		try {
+			const { comments } = await addComment({ postId, commentData, token });
+			return { comments, postId };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
 const postSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -113,6 +127,14 @@ const postSlice = createSlice({
 
 		builder.addCase(handleUnlikePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
+		});
+
+		builder.addCase(handleAddComment.fulfilled, (state, action) => {
+			state.allPosts = state.allPosts.map((post) =>
+				post._id === action.payload.postId
+					? { ...post, comments: [...action.payload.comments] }
+					: { ...post }
+			);
 		});
 	},
 });

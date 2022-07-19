@@ -2,6 +2,7 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import CommentBox from "../../components/CommentBox/CommentBox";
 import ModalCard from "../../components/ModalCard/ModalCard";
 import PostCard from "../../components/PostCard/PostCard";
 import PostCardMenu from "../../components/PostCardMenu/PostCardMenu";
@@ -14,19 +15,15 @@ function SinglePost() {
 	const { triggerRef, nodeRef, showItem } = useDetectClickOutside();
 	const currentPost = allPosts.filter(({ _id }) => postId === _id)[0];
 
-	currentPost.comments.map((comment) => {
-		console.log(comment);
-		return comment;
-	});
-
 	return (
 		<>
 			<PostCard post={currentPost} />
+			<CommentBox postId={postId} />
 			<h2 className="text-xhuge text-white text-center">Comments</h2>
 			<section className="card post-card">
 				{currentPost.comments.map((comment) => (
-					<article>
-						{currentPost.username === user.username && (
+					<article key={comment._id}>
+						{comment.username === user.username && (
 							<button ref={triggerRef}>
 								<FontAwesomeIcon
 									icon={faEllipsisVertical}
@@ -37,20 +34,20 @@ function SinglePost() {
 						<div className="card-body">
 							<div className="user-info">
 								<div className="avatar">
-									<img src={currentPost.userImage} alt={currentPost.username} />
+									<img src={comment.userImage} alt={comment.username} />
 								</div>
 								<div>
-									<h4 className="text-md text-white">{currentPost.username}</h4>
+									<h4 className="text-md text-white">{comment.username}</h4>
 									<small className="text-sm text-gray">
-										{currentPost.createdAt}
+										{comment.createdAt}
 									</small>
 								</div>
 							</div>
-							<p className="text-white">{currentPost.content}</p>
+							<p className="text-white">{comment.text}</p>
 						</div>
 						{showItem && (
 							<ModalCard ref={nodeRef} position="top-right">
-								<PostCardMenu post={currentPost} />
+								<PostCardMenu post={comment} />
 							</ModalCard>
 						)}
 					</article>

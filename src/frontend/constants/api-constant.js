@@ -11,5 +11,6 @@ export const API_BOOKMARK = "/api/users/bookmark";
 export const API_REMOVE_BOOKMARK = "/api/users/remove-bookmark";
 export const API_LIKE = "/api/posts/like";
 export const API_UNLIKE = "/api/posts/dislike";
+export const API_COMMENT_ADD = "/api/comments/add";
 
 
