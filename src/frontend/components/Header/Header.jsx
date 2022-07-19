@@ -1,6 +1,6 @@
 import { faBars, faClover, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { handleLogout } from "../../features/Auth/authSlice";
@@ -9,6 +9,7 @@ import "./Header.css";
 function Header() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const { user } = useSelector((store) => store.auth);
 
 	return (
 		<header className="header flex">
@@ -35,9 +36,15 @@ function Header() {
 				</button>
 			</div>
 			<NavLink to="/profile">
-				<div className="avatar flex-container">
-					<div className="avatar-content text-white font-bold">R</div>
-				</div>
+				{
+					<div className="avatar flex-container">
+						{user.image ? (
+							<img src={user.image} alt="user" />
+						) : (
+							<div className="avatar-content text-white font-bold">A</div>
+						)}
+					</div>
+				}
 			</NavLink>
 		</header>
 	);
