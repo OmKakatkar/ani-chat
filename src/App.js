@@ -12,6 +12,7 @@ import Profile from "./frontend/features/Profile/Profile";
 import Post from "./frontend/features/Post/Post";
 import NewPosts from "./frontend/components/NewPosts/NewPosts";
 import Bookmarks from "./frontend/components/Bookmarks/Bookmarks";
+import SinglePost from "./frontend/features/SinglePost/SinglePost";
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 					</Route>
 					<Route element={<Feed />}>
 						<Route path="/bookmarks" element={<Bookmarks />} />
+						<Route path="/post/:postId" element={<SinglePost />} />
 					</Route>
 					<Route path="/profile" element={<Profile />} />
 				</Route>
