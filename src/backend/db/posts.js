@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
 
 /**
@@ -8,7 +7,7 @@ import { formatDate } from "../utils/authUtils";
 
 export const posts = [
 	{
-		_id: uuid(),
+		_id: "aa13231a-572b-42dc-a2d9-e4ea3fb68b71",
 		content: "El Psy Congroo!!!",
 		likes: {
 			likeCount: 2,
@@ -31,7 +30,7 @@ export const posts = [
 		updatedAt: formatDate(),
 		comments: [
 			{
-				_id: uuid(),
+				_id: "bb13231a-572b-42dc-a2d9-e4ea3fasdasdsa",
 				username: "kurisu12",
 				userImage:
 					"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254295/ani-chat/350_qcdv4a.jpg",
@@ -43,10 +42,23 @@ export const posts = [
 				createdAt: formatDate(),
 				updatedAt: formatDate(),
 			},
+			{
+				_id: "bb13231a-572b-42dc-a2d9-e4ytjytythdsa",
+				username: "john_12",
+				userImage:
+					"https://res.cloudinary.com/dwubqdebj/image/upload/v1654799864/ani-chat/pexels-andre-furtado-1264210_vbekhh.jpg",
+				text: "Sasuga Mad Scientist!!!",
+				votes: {
+					upvotedBy: [],
+					downvotedBy: [],
+				},
+				createdAt: formatDate(),
+				updatedAt: formatDate(),
+			},
 		],
 	},
 	{
-		_id: uuid(),
+		_id: "aa13231a-572b-42dc-a2d9-e4ea3fb68b72",
 		content: "It is foolish to fear what we have yet to see and know.",
 		likes: {
 			likeCount: 3,
@@ -73,7 +85,7 @@ export const posts = [
 		updatedAt: formatDate(),
 		comments: [
 			{
-				_id: uuid(),
+				_id: "bb13231a-572b-42dc-a2d9-easdsaasdsa",
 				username: "yui767",
 				userImage:
 					"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254119/ani-chat/350_ocms2r.png",
@@ -88,7 +100,7 @@ export const posts = [
 		],
 	},
 	{
-		_id: uuid(),
+		_id: "aa13231a-572b-42dc-a2d9-e4ea3fb68b73",
 		content:
 			"Everyone is a slave to their past. No matter how much you wish to move forward, the events of last year will bear down on you like the light of the stars as soon as you glance up. Unable to laugh or to banish your past, you carry it ceaselessly in a corner of your heart, waiting for it to resurrect at an inopportune moment.",
 		likes: {
@@ -112,7 +124,7 @@ export const posts = [
 		updatedAt: formatDate(),
 		comments: [
 			{
-				_id: uuid(),
+				_id: "bb13231a-572b-42dc-a2d9-e4asdsasaas71",
 				username: "yui767",
 				userImage:
 					"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254119/ani-chat/350_ocms2r.png",
@@ -127,7 +139,7 @@ export const posts = [
 		],
 	},
 	{
-		_id: uuid(),
+		_id: "aa13231a-572b-42dc-a2d9-e4ea3fb68b74",
 		content:
 			"I’ve only lived 18 years, but I don’t want to change any of them. They’re all part of my life, even the failures.",
 		likes: {

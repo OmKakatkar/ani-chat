@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addComment } from "../../services/comment.service";
+import { addComment, deleteComment } from "../../services/comment.service";
 import { addLike, removeLike } from "../../services/like.service";
 import {
 	createPost,
@@ -100,6 +100,18 @@ export const handleAddComment = createAsyncThunk(
 	}
 );
 
+export const handleDeleteComment = createAsyncThunk(
+	"users/handleDeleteComment",
+	async ({ postId, commentId, token }) => {
+		try {
+			const { comments } = await deleteComment({ postId, commentId, token });
+			return { comments, postId };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
 const postSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -130,6 +142,14 @@ const postSlice = createSlice({
 		});
 
 		builder.addCase(handleAddComment.fulfilled, (state, action) => {
+			state.allPosts = state.allPosts.map((post) =>
+				post._id === action.payload.postId
+					? { ...post, comments: [...action.payload.comments] }
+					: { ...post }
+			);
+		});
+
+		builder.addCase(handleDeleteComment.fulfilled, (state, action) => {
 			state.allPosts = state.allPosts.map((post) =>
 				post._id === action.payload.postId
 					? { ...post, comments: [...action.payload.comments] }
