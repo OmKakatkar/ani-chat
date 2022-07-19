@@ -9,80 +9,150 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
 	{
 		_id: uuid(),
-		content:
-			"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum a deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+		content: "El Psy Congroo!!!",
 		likes: {
-			likeCount: 0,
-			likedBy: [],
+			likeCount: 2,
+			likedBy: [
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b71",
+					username: "kurisu12",
+				},
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b78",
+					username: "okabe22",
+				},
+			],
 			dislikedBy: [],
 		},
-		username: "adarshbalika",
+		username: "okabe22",
 		userImage:
-			"https://res.cloudinary.com/dwubqdebj/image/upload/v1654799864/ani-chat/pexels-andre-furtado-1264210_vbekhh.jpg",
+			"https://res.cloudinary.com/dwubqdebj/image/upload/v1658253776/ani-chat/latest_mgcj1h.jpg",
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 		comments: [
 			{
 				_id: uuid(),
-				username: "shubhamsoni",
+				username: "kurisu12",
 				userImage:
-					"https://res.cloudinary.com/dwubqdebj/image/upload/v1654799864/ani-chat/pexels-andre-furtado-1264210_vbekhh.jpg",
+					"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254295/ani-chat/350_qcdv4a.jpg",
 				text: "Interesting",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
 				},
+				createdAt: formatDate(),
+				updatedAt: formatDate(),
 			},
+		],
+	},
+	{
+		_id: uuid(),
+		content: "It is foolish to fear what we have yet to see and know.",
+		likes: {
+			likeCount: 3,
+			likedBy: [
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b71",
+					username: "kurisu12",
+				},
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b78",
+					username: "okabe22",
+				},
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b73",
+					username: "ayano_12",
+				},
+			],
+			dislikedBy: [],
+		},
+		username: "itachi22",
+		userImage:
+			"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254224/ani-chat/300_pk56x9.png",
+		createdAt: formatDate(),
+		updatedAt: formatDate(),
+		comments: [
 			{
 				_id: uuid(),
-				username: "sohamshah",
+				username: "yui767",
 				userImage:
-					"https://res.cloudinary.com/dwubqdebj/image/upload/v1654799864/ani-chat/pexels-andre-furtado-1264210_vbekhh.jpg",
-				text: "Wow!",
+					"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254119/ani-chat/350_ocms2r.png",
+				text: "I agree",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
 				},
+				createdAt: formatDate(),
+				updatedAt: formatDate(),
 			},
 		],
 	},
 	{
 		_id: uuid(),
 		content:
-			"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+			"Everyone is a slave to their past. No matter how much you wish to move forward, the events of last year will bear down on you like the light of the stars as soon as you glance up. Unable to laugh or to banish your past, you carry it ceaselessly in a corner of your heart, waiting for it to resurrect at an inopportune moment.",
 		likes: {
-			likeCount: 0,
-			likedBy: [],
+			likeCount: 2,
+			likedBy: [
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b74",
+					username: "yui767",
+				},
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b79",
+					username: "john_12",
+				},
+			],
 			dislikedBy: [],
 		},
-		username: "shubhamsoni",
+		username: "hachi_8",
 		userImage:
-			"https://res.cloudinary.com/dwubqdebj/image/upload/v1654799864/ani-chat/pexels-andre-furtado-1264210_vbekhh.jpg",
+			"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254072/ani-chat/350_e196i1.jpg",
+		createdAt: formatDate(),
+		updatedAt: formatDate(),
 		comments: [
 			{
 				_id: uuid(),
-				username: "shubhamsoni",
+				username: "yui767",
 				userImage:
-					"https://res.cloudinary.com/dwubqdebj/image/upload/v1654799864/ani-chat/pexels-andre-furtado-1264210_vbekhh.jpg",
-				text: "Interesting",
+					"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254119/ani-chat/350_ocms2r.png",
+				text: "That's deep......!!!!",
 				votes: {
 					upvotedBy: [],
 					downvotedBy: [],
 				},
-			},
-			{
-				_id: uuid(),
-				username: "sohamshah",
-				userImage:
-					"https://res.cloudinary.com/dwubqdebj/image/upload/v1654799864/ani-chat/pexels-andre-furtado-1264210_vbekhh.jpg",
-				text: "Wow!",
-				votes: {
-					upvotedBy: [],
-					downvotedBy: [],
-				},
+				createdAt: formatDate(),
+				updatedAt: formatDate(),
 			},
 		],
+	},
+	{
+		_id: uuid(),
+		content:
+			"I’ve only lived 18 years, but I don’t want to change any of them. They’re all part of my life, even the failures.",
+		likes: {
+			likeCount: 3,
+			likedBy: [
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b71",
+					username: "kurisu12",
+				},
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b78",
+					username: "okabe22",
+				},
+				{
+					_id: "cc13231a-572b-42dc-a2d9-e4ea3fb68b73",
+					username: "ayano_12",
+				},
+			],
+			dislikedBy: [],
+		},
+		username: "kurisu12",
+		userImage:
+			"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254295/ani-chat/350_qcdv4a.jpg",
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
+		comments: [],
 	},
 ];
