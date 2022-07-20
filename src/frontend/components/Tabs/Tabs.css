@@ -18,7 +18,8 @@
 	border-left: 1px solid var(--clr-secondary-background-lighter);
 }
 
-.tab li a:active,
+.tab li a.active,
 .tab li a:hover {
 	border-bottom: 2px solid var(--clr-brand-primary);
+	background-color: var(--clr-primary-background);
 }

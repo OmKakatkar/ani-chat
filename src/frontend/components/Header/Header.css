@@ -71,3 +71,7 @@ input[type='search']::-webkit-search-results-decoration {
 	background-color: var(--clr-brand-primary);
 	border-radius: 50%;
 }
+
+a.active {
+	background-color: var(--clr-secondary-background);
+}
