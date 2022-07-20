@@ -31,12 +31,12 @@ function Post() {
 		setPostData({ ...postData, [e.target.name]: e.target.value });
 	};
 
-	const handlePostSubmit = async (e) => {
+	const handlePostSubmit = (e) => {
 		e.preventDefault();
 		if (modalData === null) {
-			await dispatch(handleCreatePost({ postData, token }));
+			dispatch(handleCreatePost({ postData, token }));
 		} else {
-			await dispatch(
+			dispatch(
 				handleEditPost({ postData: { ...modalData, ...postData }, token })
 			);
 		}

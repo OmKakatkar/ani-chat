@@ -7,7 +7,6 @@ import {
 
 const initialState = {
 	allUsers: [],
-	temp: {},
 };
 
 export const handleGetAllUsers = createAsyncThunk(
@@ -27,7 +26,8 @@ export const handleFollowUser = createAsyncThunk(
 	async ({ id, token, dispatch, handleProfileUpdate }) => {
 		try {
 			const { user, followUser } = await addFollowUser({ id, token });
-			return dispatch(handleProfileUpdate({ user, token }));
+			dispatch(handleProfileUpdate({ user, token }));
+			return { followUser };
 		} catch (err) {
 			console.error(err);
 		}
@@ -39,7 +39,8 @@ export const handleUnFollowUser = createAsyncThunk(
 	async ({ id, token, dispatch, handleProfileUpdate }) => {
 		try {
 			const { user, followUser } = await addUnFollowUser({ id, token });
-			return dispatch(handleProfileUpdate({ user, token }));
+			dispatch(handleProfileUpdate({ user, token }));
+			return { followUser };
 		} catch (err) {
 			console.error(err);
 		}
@@ -53,6 +54,22 @@ const userSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(handleGetAllUsers.fulfilled, (state, action) => {
 			state.allUsers = action.payload;
+		});
+
+		builder.addCase(handleFollowUser.fulfilled, (state, action) => {
+			state.allUsers = state.allUsers.map((user) =>
+				user._id === action.payload.followUser._id
+					? { ...action.payload.followUser }
+					: user
+			);
+		});
+
+		builder.addCase(handleUnFollowUser.fulfilled, (state, action) => {
+			state.allUsers = state.allUsers.map((user) =>
+				user._id === action.payload.followUser._id
+					? { ...action.payload.followUser }
+					: user
+			);
 		});
 	},
 });

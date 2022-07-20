@@ -13,6 +13,8 @@ import Post from "./frontend/features/Post/Post";
 import NewPosts from "./frontend/components/NewPosts/NewPosts";
 import Bookmarks from "./frontend/components/Bookmarks/Bookmarks";
 import SinglePost from "./frontend/features/SinglePost/SinglePost";
+import TrendingPosts from "./frontend/components/TrendingPosts/TrendingPosts";
+import PersonalizedPosts from "./frontend/components/PersonalizedPosts/PersonalizedPosts";
 
 function App() {
 	return (
@@ -28,12 +30,15 @@ function App() {
 					<Route path="/feed" element={<Feed />}>
 						<Route index element={<NewPosts />} />
 						<Route path="new" element={<NewPosts />} />
+						<Route path="trending" element={<TrendingPosts />} />
+						<Route path="personalized" element={<PersonalizedPosts />} />
 					</Route>
 					<Route element={<Feed />}>
 						<Route path="/bookmarks" element={<Bookmarks />} />
 						<Route path="/post/:postId" element={<SinglePost />} />
 					</Route>
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/user/:userId" element={<Profile />} />
 				</Route>
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />

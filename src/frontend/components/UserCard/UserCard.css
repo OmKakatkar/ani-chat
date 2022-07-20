@@ -3,6 +3,11 @@
 	align-items: center;
 }
 
+.user-card a {
+	display: flex;
+	align-items: center;
+}
+
 .user-follow {
 	margin-left: 1rem;
 	color: var(--clr-brand-secondary);

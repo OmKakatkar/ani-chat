@@ -11,3 +11,11 @@ export const getUnionArraysOfObjects = (
 			({ [predicate]: checkArrayItem }) => mainArrayItem === checkArrayItem
 		)
 	);
+
+export const debounce = (func, delay) => {
+	let timeoutId;
+	clearTimeout(timeoutId);
+	timeoutId = setTimeout(() => {
+		func();
+	}, delay);
+};

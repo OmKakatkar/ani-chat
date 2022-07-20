@@ -41,7 +41,7 @@ export const addFollowUser = async ({ id, token }) => {
  */
 export const addUnFollowUser = async ({ id, token }) => {
 	try {
-		const data = await axios.post(
+		const { data } = await axios.post(
 			`${API_UNFOLLOW}/${id}`,
 			{},
 			{

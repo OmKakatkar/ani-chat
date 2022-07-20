@@ -1,10 +1,9 @@
-import dayjs from "dayjs";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetAllPosts } from "../../features/Post/postSlice";
 import PostCard from "../PostCard/PostCard";
 
-function NewPosts() {
+function TrendingPosts() {
 	const { allPosts } = useSelector((store) => store.post);
 
 	const dispatch = useDispatch();
@@ -18,13 +17,9 @@ function NewPosts() {
 		<>
 			{allPosts.length &&
 				[...allPosts]
-					.sort((a, b) => {
-						const time1 = dayjs(a.createdAt);
-						const time2 = dayjs(b.createdAt);
-						return time2.diff(time1);
-					})
+					.sort((a, b) => b.likes.likeCount - a.likes.likeCount)
 					.map((post) => <PostCard key={post._id} post={post} />)}
 		</>
 	);
 }
-export default NewPosts;
+export default TrendingPosts;
