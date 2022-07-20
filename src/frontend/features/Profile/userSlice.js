@@ -7,7 +7,6 @@ import {
 
 const initialState = {
 	allUsers: [],
-	temp: {},
 };
 
 export const handleGetAllUsers = createAsyncThunk(
