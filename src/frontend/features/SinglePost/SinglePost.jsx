@@ -1,10 +1,11 @@
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import CommentBox from "../../components/CommentBox/CommentBox";
 import PostCard from "../../components/PostCard/PostCard";
-import { handleDeleteComment } from "../Post/postSlice";
+import { handleDeleteComment, handleGetAllPosts } from "../Post/postSlice";
 import "./SinglePost.css";
 
 function SinglePost() {
@@ -13,6 +14,14 @@ function SinglePost() {
 	const { postId } = useParams();
 	const dispatch = useDispatch();
 	const currentPost = allPosts.filter(({ _id }) => postId === _id)[0];
+	const [currentId, setCurrentId] = useState("");
+	const [isEditing, setIsEditing] = useState(false);
+
+	useEffect(() => {
+		if (!allPosts.length) {
+			dispatch(handleGetAllPosts());
+		}
+	}, [allPosts.length, dispatch]);
 
 	return (
 		<>
@@ -35,28 +44,44 @@ function SinglePost() {
 										</small>
 									</div>
 								</div>
-								<p className="text-white">{comment.text}</p>
+								{(isEditing && currentId === comment._id) ? (
+									<CommentBox
+										postId={postId}
+										commentData={comment}
+										isEditing={isEditing}
+										setIsEditing={setIsEditing}
+									/>
+								) : (
+									<p className="text-white">{comment.text}</p>
+								)}
 							</div>
-							{user.username === comment.username && (
-								<div className="comment-card-buttons">
-									<button
-										onClick={() => {
-											dispatch(
-												handleDeleteComment({
-													postId,
-													commentId: comment._id,
-													token,
-												})
-											);
-										}}
-									>
-										<FontAwesomeIcon icon={faTrash} className="icon" />
-									</button>
-									<button onClick={() => {}}>
-										<FontAwesomeIcon icon={faPencil} className="icon" />
-									</button>
-								</div>
-							)}
+							{!isEditing 
+								 &&
+								user.username === comment.username && (
+									<div className="comment-card-buttons">
+										<button
+											onClick={() => {
+												dispatch(
+													handleDeleteComment({
+														postId,
+														commentId: comment._id,
+														token,
+													})
+												);
+											}}
+										>
+											<FontAwesomeIcon icon={faTrash} className="icon" />
+										</button>
+										<button
+											onClick={() => {
+												setCurrentId(comment._id);
+												setIsEditing(true);
+											}}
+										>
+											<FontAwesomeIcon icon={faPencil} className="icon" />
+										</button>
+									</div>
+								)}
 						</article>
 					))}
 			</section>

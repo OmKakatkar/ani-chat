@@ -1,21 +1,36 @@
-import { faReply } from "@fortawesome/free-solid-svg-icons";
+import { faMultiply, faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { handleAddComment } from "../../features/Post/postSlice";
+import {
+	handleAddComment,
+	handleEditComment,
+} from "../../features/Post/postSlice";
 import "./CommentBox.css";
 
-function CommentBox({ postId }) {
+function CommentBox({ postId, commentData, isEditing, setIsEditing }) {
 	const dispatch = useDispatch();
 	const { token } = useSelector((store) => store.auth);
-	const [comment, setComment] = useState("");
+	const [comment, setComment] = useState(commentData?.text || "");
 
 	const submitComment = (e) => {
 		e.preventDefault();
-		dispatch(
-			handleAddComment({ postId, commentData: { text: comment }, token })
-		);
-		setComment("");
+		if (isEditing) {
+			dispatch(
+				handleEditComment({
+					postId,
+					commentData: { ...commentData, text: comment },
+					token,
+				})
+			);
+			setComment("");
+			setIsEditing(false);
+		} else {
+			dispatch(
+				handleAddComment({ postId, commentData: { text: comment }, token })
+			);
+			setComment("");
+		}
 	};
 
 	return (
@@ -32,6 +47,11 @@ function CommentBox({ postId }) {
 			<button className="btn bg-blue">
 				<FontAwesomeIcon icon={faReply} />
 			</button>
+			{isEditing && (
+				<button className="btn bg-red" onClick={() => setIsEditing(false)}>
+					<FontAwesomeIcon icon={faMultiply} />
+				</button>
+			)}
 		</form>
 	);
 }

@@ -1,5 +1,9 @@
 import axios from "axios";
-import { API_COMMENT_ADD, API_COMMENT_DELETE } from "../constants/api-constant";
+import {
+	API_COMMENT_ADD,
+	API_COMMENT_DELETE,
+	API_COMMENT_EDIT,
+} from "../constants/api-constant";
 
 /**
  * Post a comment
@@ -31,6 +35,27 @@ export const deleteComment = async ({ postId, commentId, token }) => {
 		const { data } = await axios.post(
 			`${API_COMMENT_DELETE}/${postId}/${commentId}`,
 			{},
+			{
+				headers: {
+					authorization: token,
+				},
+			}
+		);
+		return data;
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+/**
+ * Edit a comment
+ * @return comments for a post
+ */
+export const editComment = async ({ postId, commentData, token }) => {
+	try {
+		const { data } = await axios.post(
+			`${API_COMMENT_EDIT}/${postId}/${commentData._id}`,
+			{ commentData },
 			{
 				headers: {
 					authorization: token,
