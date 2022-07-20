@@ -16,9 +16,7 @@ function SideBarRight() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		(async () => {
-			await dispatch(handleGetAllUsers());
-		})();
+		dispatch(handleGetAllUsers());
 	}, [dispatch]);
 
 	const usersNotFollowing = allUsers.filter(
@@ -39,9 +37,9 @@ function SideBarRight() {
 							<UserCard key={currUser._id} userData={currUser}>
 								<button
 									className="user-follow"
-									onClick={async () => {
+									onClick={() => {
 										dispatch(
-											await handleFollowUser({
+											handleFollowUser({
 												id: currUser._id,
 												token,
 												dispatch,
@@ -61,9 +59,9 @@ function SideBarRight() {
 						<UserCard key={currUser._id} userData={currUser}>
 							<button
 								className="user-follow"
-								onClick={async () => {
+								onClick={() => {
 									dispatch(
-										await handleUnFollowUser({
+										handleUnFollowUser({
 											id: currUser._id,
 											token,
 											dispatch,

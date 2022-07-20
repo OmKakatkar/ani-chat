@@ -38,6 +38,7 @@ function App() {
 						<Route path="/post/:postId" element={<SinglePost />} />
 					</Route>
 					<Route path="/profile" element={<Profile />} />
+					<Route path="/user/:userId" element={<Profile />} />
 				</Route>
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />

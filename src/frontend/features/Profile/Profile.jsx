@@ -1,19 +1,28 @@
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import ModalCard from "../../components/ModalCard/ModalCard";
 import ProfileUpdate from "../../components/ProfileUpdate/ProfileUpdate";
 import useDetectClickOutside from "../../hooks/useDetectClickOutside";
 import "./Profile.css";
 
 function Profile() {
-	const { user } = useSelector((store) => store.auth);
+	const { userId } = useParams();
+	const { allUsers } = useSelector((store) => store.user);
+	const { user: currentUser } = useSelector((store) => store.auth);
 	const { triggerRef, nodeRef, showItem, setShowItem } =
 		useDetectClickOutside();
 
+	const user = userId
+		? allUsers.filter(({ _id }) => _id === userId)[0]
+		: currentUser;
+
 	return (
 		<div className="text-white">
-			<button className="profile-edit" ref={triggerRef}>
-				Edit
-			</button>
+			{!userId && (
+				<button className="profile-edit" ref={triggerRef}>
+					Edit
+				</button>
+			)}
 			<div className="image circular">
 				<img src={user.image} alt="Profile" />
 			</div>

@@ -7,3 +7,7 @@
 	border-radius: 10px;
 	background-color: var(--clr-brand-secondary);
 }
+
+.image {
+	margin: auto;
+}
