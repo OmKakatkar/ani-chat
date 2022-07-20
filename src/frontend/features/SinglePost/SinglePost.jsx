@@ -25,66 +25,70 @@ function SinglePost() {
 
 	return (
 		<>
-			<PostCard post={currentPost} />
-			<CommentBox postId={postId} />
-			<h2 className="text-xhuge text-white text-center">Comments</h2>
-			<section className="card post-card">
-				{currentPost &&
-					currentPost.comments.map((comment) => (
-						<article className="post-card comment-card" key={comment._id}>
-							<div className="card-body">
-								<div className="user-info">
-									<div className="avatar">
-										<img src={comment.userImage} alt={comment.username} />
+			{currentPost && (
+				<>
+					<PostCard post={currentPost} />
+					<CommentBox postId={postId} />
+					<h2 className="text-xhuge text-white text-center">Comments</h2>
+					<section className="card post-card">
+						{currentPost &&
+							currentPost.comments.map((comment) => (
+								<article className="post-card comment-card" key={comment._id}>
+									<div className="card-body">
+										<div className="user-info">
+											<div className="avatar">
+												<img src={comment.userImage} alt={comment.username} />
+											</div>
+											<div>
+												<h4 className="text-md text-white">
+													{comment.username}
+												</h4>
+												<small className="text-sm text-gray">
+													{comment.createdAt}
+												</small>
+											</div>
+										</div>
+										{isEditing && currentId === comment._id ? (
+											<CommentBox
+												postId={postId}
+												commentData={comment}
+												isEditing={isEditing}
+												setIsEditing={setIsEditing}
+											/>
+										) : (
+											<p className="text-white">{comment.text}</p>
+										)}
 									</div>
-									<div>
-										<h4 className="text-md text-white">{comment.username}</h4>
-										<small className="text-sm text-gray">
-											{comment.createdAt}
-										</small>
-									</div>
-								</div>
-								{(isEditing && currentId === comment._id) ? (
-									<CommentBox
-										postId={postId}
-										commentData={comment}
-										isEditing={isEditing}
-										setIsEditing={setIsEditing}
-									/>
-								) : (
-									<p className="text-white">{comment.text}</p>
-								)}
-							</div>
-							{!isEditing 
-								 &&
-								user.username === comment.username && (
-									<div className="comment-card-buttons">
-										<button
-											onClick={() => {
-												dispatch(
-													handleDeleteComment({
-														postId,
-														commentId: comment._id,
-														token,
-													})
-												);
-											}}
-										>
-											<FontAwesomeIcon icon={faTrash} className="icon" />
-										</button>
-										<button
-											onClick={() => {
-												setCurrentId(comment._id);
-												setIsEditing(true);
-											}}
-										>
-											<FontAwesomeIcon icon={faPencil} className="icon" />
-										</button>
-									</div>
-								)}
-						</article>
-					))}
-			</section>
+									{!isEditing && user.username === comment.username && (
+										<div className="comment-card-buttons">
+											<button
+												onClick={() => {
+													dispatch(
+														handleDeleteComment({
+															postId,
+															commentId: comment._id,
+															token,
+														})
+													);
+												}}
+											>
+												<FontAwesomeIcon icon={faTrash} className="icon" />
+											</button>
+											<button
+												onClick={() => {
+													setCurrentId(comment._id);
+													setIsEditing(true);
+												}}
+											>
+												<FontAwesomeIcon icon={faPencil} className="icon" />
+											</button>
+										</div>
+									)}
+								</article>
+							))}
+					</section>
+				</>
+			)}
 		</>
 	);
 }
