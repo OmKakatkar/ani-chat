@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { success } from "../../constants/toast-constants";
 import {
 	handleAddBookmark,
@@ -33,6 +34,7 @@ function PostCard({ post }) {
 	const { triggerRef, nodeRef, showItem } = useDetectClickOutside();
 	const isBookMark = checkItemInArray(user.bookmarks, post);
 	const isLiked = checkItemInArray(post.likes.likedBy, user);
+	const location = useLocation();
 
 	return (
 		<article className="card post-card">
@@ -45,16 +47,18 @@ function PostCard({ post }) {
 				</button>
 			)}
 			<div className="card-body">
-				<div className="user-info">
-					<div className="avatar">
-						<img src={post.userImage} alt={post.username} />
+				<Link to={`/post/${post._id}`} className="flex-column">
+					<div className="user-info">
+						<div className="avatar">
+							<img src={post.userImage} alt={post.username} />
+						</div>
+						<div>
+							<h4 className="text-md text-white">{post.username}</h4>
+							<small className="text-sm text-gray">{post.createdAt}</small>
+						</div>
 					</div>
-					<div>
-						<h4 className="text-md text-white">{post.username}</h4>
-						<small className="text-sm text-gray">{post.createdAt}</small>
-					</div>
-				</div>
-				<p className="text-white">{post.content}</p>
+					<p className="text-white">{post.content}</p>
+				</Link>
 				<div className="card-buttons">
 					<span className="button-wrapper">
 						{isLiked ? (
@@ -99,15 +103,17 @@ function PostCard({ post }) {
 							<FontAwesomeIcon icon={faBookmark} className="icon" />
 						</button>
 					)}
-					<button>
-						<FontAwesomeIcon icon={faComment} className="icon" />
-					</button>
+					{location.pathname !== `/post/${post._id}` && (
+						<Link to={`/post/${post._id}`} className="flex-column">
+							<FontAwesomeIcon icon={faComment} className="icon" />
+						</Link>
+					)}
 					<button
 						onClick={() => {
 							navigator.clipboard.writeText(
 								`https://ani-chat.netlify.app/post/${post._id}`
 							);
-							notify(success, 'Link Copied!')
+							notify(success, "Link Copied!");
 						}}
 					>
 						<FontAwesomeIcon icon={faShareNodes} className="icon" />

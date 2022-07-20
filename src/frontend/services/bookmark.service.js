@@ -54,7 +54,6 @@ export const getAllBookmarks = async ({ token }) => {
 				authorization: token,
 			},
 		});
-		console.log(data)
 		return data;
 	} catch (err) {
 		console.error(err);

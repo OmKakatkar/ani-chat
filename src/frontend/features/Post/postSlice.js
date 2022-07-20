@@ -1,4 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+	addComment,
+	deleteComment,
+	editComment,
+} from "../../services/comment.service";
 import { addLike, removeLike } from "../../services/like.service";
 import {
 	createPost,
@@ -86,6 +91,43 @@ export const handleUnlikePost = createAsyncThunk(
 	}
 );
 
+// Comments
+export const handleAddComment = createAsyncThunk(
+	"users/handleAddComment",
+	async ({ postId, commentData, token }) => {
+		try {
+			const { comments } = await addComment({ postId, commentData, token });
+			return { comments, postId };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
+export const handleDeleteComment = createAsyncThunk(
+	"users/handleDeleteComment",
+	async ({ postId, commentId, token }) => {
+		try {
+			const { comments } = await deleteComment({ postId, commentId, token });
+			return { comments, postId };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
+export const handleEditComment = createAsyncThunk(
+	"users/handleEditComment",
+	async ({ postId, commentData, token }) => {
+		try {
+			const { comments } = await editComment({ postId, commentData, token });
+			return { comments, postId };
+		} catch (err) {
+			console.error(err);
+		}
+	}
+);
+
 const postSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -113,6 +155,30 @@ const postSlice = createSlice({
 
 		builder.addCase(handleUnlikePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
+		});
+
+		builder.addCase(handleAddComment.fulfilled, (state, action) => {
+			state.allPosts = state.allPosts.map((post) =>
+				post._id === action.payload.postId
+					? { ...post, comments: [...action.payload.comments] }
+					: { ...post }
+			);
+		});
+
+		builder.addCase(handleDeleteComment.fulfilled, (state, action) => {
+			state.allPosts = state.allPosts.map((post) =>
+				post._id === action.payload.postId
+					? { ...post, comments: [...action.payload.comments] }
+					: { ...post }
+			);
+		});
+
+		builder.addCase(handleEditComment.fulfilled, (state, action) => {
+			state.allPosts = state.allPosts.map((post) =>
+				post._id === action.payload.postId
+					? { ...post, comments: [...action.payload.comments] }
+					: { ...post }
+			);
 		});
 	},
 });

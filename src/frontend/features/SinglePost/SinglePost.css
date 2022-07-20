@@ -1,0 +1,10 @@
+.comment-card {
+	position: relative;
+}
+
+.comment-card-buttons {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 1;
+}
