@@ -35,7 +35,10 @@ function Profile() {
 						</button>
 					)}
 					<div className="image circular">
-						<img src={user.image} alt="Profile" />
+						<img
+							src={user.image}
+							alt={`${user.firstName} ${user.lastName}'s Profile`}
+						/>
 					</div>
 					<div>
 						<div className="flex flex-column text-center">

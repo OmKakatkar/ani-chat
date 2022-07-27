@@ -7,7 +7,7 @@ function UserCard({ children, userData }) {
 				<div className="avatar lg">
 					<img src={userData?.image} alt={userData?.firstName} />
 				</div>
-				<p className="text-white">
+				<p className="text-white text-center">
 					{userData?.firstName} {userData?.lastName}
 				</p>
 			</Link>

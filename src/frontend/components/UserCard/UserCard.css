@@ -8,6 +8,11 @@
 	align-items: center;
 }
 
+.user-card img {
+	height: 100%;
+	max-inline-size: initial;
+}
+
 .user-follow {
 	margin-left: 1rem;
 	color: var(--clr-brand-secondary);

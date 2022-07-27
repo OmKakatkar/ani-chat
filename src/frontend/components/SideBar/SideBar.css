@@ -23,6 +23,10 @@
 	width: 100%;
 }
 
+.sidebar-spacer.half {
+	margin-top: calc(var(--height-header) / 2);
+}
+
 .sidebar-content {
 	overflow-y: auto;
 }
