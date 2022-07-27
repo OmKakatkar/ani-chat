@@ -38,12 +38,13 @@ function SignUp() {
 			<div className="form-container">
 				<form className="flex-container flex-column" onSubmit={handleSubmit}>
 					<h1 className="text-xhuge form-heading">Sign Up</h1>
-					{SIGNUP_DB.map(({ id, type, label, name }) => (
+					{SIGNUP_DB.map(({ id, type, label, name, autoComplete }) => (
 						<Input
 							key={id}
 							type={type}
 							label={label}
 							name={name}
+							autoComplete={autoComplete}
 							value={signUpData[name]}
 							handleChange={handleChange}
 						/>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Input from "../../../components/Input/Input";
 import { LOGIN_DB } from "../../../constants/login-form-data";
@@ -18,8 +18,6 @@ function Login() {
 	const dispatch = useDispatch();
 	const [loginData, setLoginData] = useState(initialLoginData);
 	const [isLoginRemember, setIsLoginRemember] = useState(false);
-	const location = useLocation();
-	console.log(location.state);
 
 	const handleChange = (e) => {
 		setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -40,12 +38,13 @@ function Login() {
 			<div className="form-container">
 				<form className="flex-container flex-column" onSubmit={handleSubmit}>
 					<h1 className="text-xhuge form-heading">Login</h1>
-					{LOGIN_DB.map(({ id, type, label, name }) => (
+					{LOGIN_DB.map(({ id, type, label, name, autoComplete }) => (
 						<Input
 							key={id}
 							type={type}
 							label={label}
 							name={name}
+							autoComplete={autoComplete}
 							value={loginData[name]}
 							handleChange={handleChange}
 						/>

@@ -1,4 +1,7 @@
-import { faBars, faClover } from "@fortawesome/free-solid-svg-icons";
+import {
+	// faBars,
+	faClover,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -49,7 +52,7 @@ function Header() {
 	return (
 		<header className="header flex">
 			<div className="flex">
-				<FontAwesomeIcon icon={faBars} className="header-icon text-xlg" />
+				{/* <FontAwesomeIcon icon={faBars} className="header-icon text-xlg" /> */}
 				<div className="flex header-brand">
 					<FontAwesomeIcon icon={faClover} className="header-logo text-huge" />
 					<h2 className="header-text text-xlg">ANICHAT</h2>
@@ -59,6 +62,7 @@ function Header() {
 				<input
 					type="search"
 					className="header-searchbar text-white"
+					placeholder="Search Users..."
 					value={searchUser}
 					onChange={(e) => setSearchUser(e.target.value)}
 					ref={triggerRef}

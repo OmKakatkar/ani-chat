@@ -20,7 +20,7 @@ function PersonalizedPosts() {
 
 	return (
 		<>
-			{personalizedPosts.length ?
+			{personalizedPosts.length > 0 ?
 				personalizedPosts
 					.map((post) => <PostCard key={post._id} post={post} />)
 				: <h2 className="text-xhuge text-white text-center">No Users Followed</h2>}

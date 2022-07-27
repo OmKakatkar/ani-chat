@@ -4,11 +4,13 @@ export const LOGIN_DB = [
 		type: "text",
 		label: "Username",
 		name: "username",
+		autoComplete: "current-username",
 	},
 	{
 		id: 2,
 		type: "password",
 		label: "Password",
 		name: "password",
+		autoComplete: "current-password",
 	},
 ];

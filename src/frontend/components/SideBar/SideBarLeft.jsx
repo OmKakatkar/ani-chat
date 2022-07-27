@@ -15,7 +15,7 @@ function SideBarLeft() {
 				<nav className="sidebar-inner-content">
 					<ul className="sidebar-list">
 						<li className="sidebar-list-item">
-							<NavLink to="/feed" className="sidebar-item-link text-white">
+							<NavLink to="/feed/new" className="sidebar-item-link text-white">
 								<span className="icon-container">
 									<FontAwesomeIcon icon={faHome} className="text-lg" />
 								</span>

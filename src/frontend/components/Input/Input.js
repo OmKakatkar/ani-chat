@@ -2,6 +2,7 @@ function Input({
 	type,
 	label,
 	name,
+	autoComplete,
 	value,
 	handleChange,
 	classNames,
@@ -17,6 +18,7 @@ function Input({
 				value={value}
 				onChange={handleChange}
 				required={required}
+				autoComplete={autoComplete}
 			/>
 		</div>
 	);

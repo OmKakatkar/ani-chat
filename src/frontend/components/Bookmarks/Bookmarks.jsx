@@ -10,7 +10,7 @@ function Bookmarks() {
 
 	return (
 		<>
-			{allBookmarks.length ? (
+			{allBookmarks.length > 0 ? (
 				allBookmarks.map((post) => <PostCard key={post._id} post={post} />)
 			) : (
 				<p className="text-xhuge text-white text-center">No Posts Bookmarked</p>

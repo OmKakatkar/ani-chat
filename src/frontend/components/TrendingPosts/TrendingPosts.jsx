@@ -15,7 +15,7 @@ function TrendingPosts() {
 
 	return (
 		<>
-			{allPosts.length &&
+			{allPosts.length > 0 &&
 				[...allPosts]
 					.sort((a, b) => b.likes.likeCount - a.likes.likeCount)
 					.map((post) => <PostCard key={post._id} post={post} />)}

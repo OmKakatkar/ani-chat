@@ -16,7 +16,7 @@ function NewPosts() {
 
 	return (
 		<>
-			{allPosts.length &&
+			{allPosts.length > 0 &&
 				[...allPosts]
 					.sort((a, b) => {
 						const time1 = dayjs(a.createdAt);
