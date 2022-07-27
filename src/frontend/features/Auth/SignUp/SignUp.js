@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Input from "../../../components/Input/Input";
 import { SIGNUP_DB } from "../../../constants/signup-form-data";
@@ -18,14 +18,11 @@ function SignUp() {
 	};
 	const [signUpData, setSignUpData] = useState(initialSignUpData);
 	const [acceptTnC, setAcceptTnC] = useState(false);
-
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await dispatch(handleSignUp(signUpData));
-		navigate("/feed");
 	};
 
 	const handleChange = (e) => {
@@ -37,7 +34,7 @@ function SignUp() {
 	};
 
 	return (
-		<main className="flex-container">
+		<main className="flex-container auth-container">
 			<div className="form-container">
 				<form className="flex-container flex-column" onSubmit={handleSubmit}>
 					<h1 className="text-xhuge form-heading">Sign Up</h1>
@@ -86,7 +83,7 @@ function SignUp() {
 					className="btn rounded bd-blue"
 					onClick={handleGuestSignUp}
 				>
-					Guest Login
+					Guest Credentials
 				</button>
 				<div className="text-center">
 					<Link to="/login" className="form-link">

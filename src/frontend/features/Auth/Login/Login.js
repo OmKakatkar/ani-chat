@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Input from "../../../components/Input/Input";
 import { LOGIN_DB } from "../../../constants/login-form-data";
@@ -16,8 +16,10 @@ function Login() {
 	};
 
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const [loginData, setLoginData] = useState(initialLoginData);
+	const [isLoginRemember, setIsLoginRemember] = useState(false);
+	const location = useLocation();
+	console.log(location.state);
 
 	const handleChange = (e) => {
 		setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -25,16 +27,16 @@ function Login() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await dispatch(handleLogin(loginData));
-		navigate("/feed");
+		await dispatch(handleLogin({ ...loginData, isLoginRemember }));
 	};
 
 	const handleGuestLogin = async (e) => {
 		setLoginData(TEST_USER_LOGIN);
+		setIsLoginRemember(true);
 	};
 
 	return (
-		<main className="flex-container">
+		<main className="flex-container auth-container">
 			<div className="form-container">
 				<form className="flex-container flex-column" onSubmit={handleSubmit}>
 					<h1 className="text-xhuge form-heading">Login</h1>
@@ -49,19 +51,25 @@ function Login() {
 						/>
 					))}
 					<div className="input-container input-wrap">
-						<label htmlFor="remember" className="checkbox text-sm">
+						<label htmlFor="isLoginRemember" className="checkbox text-sm">
 							<input
 								type="checkbox"
-								name="remember"
-								id="remember"
+								name="isLoginRemember"
+								id="isLoginRemember"
 								className="checkbox-input"
+								checked={isLoginRemember}
+								onChange={() =>
+									setIsLoginRemember(
+										(currentIsLoginRemember) => !currentIsLoginRemember
+									)
+								}
 							/>
 							<div className="checkbox-icon"></div>
 							Remember me
 						</label>
-						<Link to="/password-reset" className="form-link">
+						{/* <Link to="/password-reset" className="form-link">
 							Forgot Password?
-						</Link>
+						</Link> */}
 					</div>
 					<button
 						type="submit"

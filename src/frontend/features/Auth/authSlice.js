@@ -8,20 +8,22 @@ import {
 
 const currentUser = "ANICHAT_USER";
 const currentToken = "ANICHAT_TOKEN";
+const remeberStatus = "ANICHAT_isLoginRemember";
 const initialState = {
 	user: JSON.parse(localStorage.getItem(currentUser)) || {},
 	token: localStorage.getItem(currentToken) || "",
+	isLoginRemember: localStorage.getItem(remeberStatus) || false,
 };
 
 export const handleLogin = createAsyncThunk(
 	"auth/handleLogin",
-	async ({ username, password }) => {
+	async ({ username, password, isLoginRemember }) => {
 		try {
 			const { foundUser: user, encodedToken: token } = await login({
 				username,
 				password,
 			});
-			return { user, token };
+			return { user, token, isLoginRemember };
 		} catch (err) {
 			console.error(err);
 		}
@@ -38,7 +40,7 @@ export const handleSignUp = createAsyncThunk(
 				username,
 				password,
 			});
-			return { user, token };
+			return { user, token, isLoginRemember: true };
 		} catch (err) {
 			console.error(err);
 		}
@@ -101,88 +103,104 @@ const authSlice = createSlice({
 		handleLogout: (state) => {
 			localStorage.removeItem(currentUser);
 			localStorage.removeItem(currentToken);
+			localStorage.removeItem(remeberStatus);
 			state.user = {};
 			state.token = "";
+			state.remeberStatus = false;
 		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(handleLogin.fulfilled, (state, action) => {
 			state.user = action.payload.user;
 			state.token = action.payload.token;
+			state.isLoginRemember = action.payload.isLoginRemember;
 			delete action.payload.user.password;
-			localStorage.setItem(
-				currentUser,
-				JSON.stringify({
-					...action.payload.user,
-					followers: [],
-					following: [],
-				})
-			);
-			localStorage.setItem(currentToken, action.payload.token);
+			if (action.payload.isLoginRemember) {
+				localStorage.setItem(
+					currentUser,
+					JSON.stringify({
+						...action.payload.user,
+						followers: [],
+						following: [],
+					})
+				);
+				localStorage.setItem(currentToken, action.payload.token);
+			}
 		});
 
 		builder.addCase(handleSignUp.fulfilled, (state, action) => {
 			state.user = action.payload.user;
 			state.token = action.payload.token;
+			state.isLoginRemember = action.payload.isLoginRemember;
 			delete action.payload.user.password;
-			localStorage.setItem(
-				currentUser,
-				JSON.stringify({
-					...action.payload.user,
-					followers: [],
-					following: [],
-				})
-			);
-			localStorage.setItem(currentToken, action.payload.token);
+			if (action.payload.isLoginRemember) {
+				localStorage.setItem(
+					currentUser,
+					JSON.stringify({
+						...action.payload.user,
+						followers: [],
+						following: [],
+					})
+				);
+				localStorage.setItem(currentToken, action.payload.token);
+			}
 		});
 
 		builder.addCase(handleProfileUpdate.fulfilled, (state, action) => {
 			state.user = action.payload.user;
 			delete action.payload.user.password;
-			localStorage.setItem(
-				currentUser,
-				JSON.stringify({
-					...action.payload.user,
-					followers: [],
-					following: [],
-				})
-			);
+			if (action.payload.isLoginRemember) {
+				localStorage.setItem(
+					currentUser,
+					JSON.stringify({
+						...action.payload.user,
+						followers: [],
+						following: [],
+					})
+				);
+			}
 		});
 
 		builder.addCase(handleAddBookmark.fulfilled, (state, action) => {
 			state.user.bookmarks = action.payload.bookmarks;
-			localStorage.setItem(
-				currentUser,
-				JSON.stringify({
-					...action.payload.user,
-					followers: [],
-					following: [],
-				})
-			);
+			if (action.payload.isLoginRemember) {
+				localStorage.setItem(
+					currentUser,
+					JSON.stringify({
+						...action.payload.user,
+						followers: [],
+						following: [],
+					})
+				);
+			}
 		});
 
 		builder.addCase(handleRemoveBookmark.fulfilled, (state, action) => {
 			state.user.bookmarks = action.payload.bookmarks;
-			localStorage.setItem(
-				currentUser,
-				JSON.stringify({
-					...action.payload.user,
-					followers: [],
-					following: [],
-				})
-			);
+			if (action.payload.isLoginRemember) {
+				localStorage.setItem(
+					currentUser,
+					JSON.stringify({
+						...action.payload.user,
+						followers: [],
+						following: [],
+					})
+				);
+			}
 		});
 
 		builder.addCase(handleGetAllBookmarks.fulfilled, (state, action) => {
 			state.user.bookmarks = action.payload.bookmarks;
-			localStorage.setItem(
-				currentUser,
-				JSON.stringify({
-					...action.payload.user,
-					followers: [],
-					following: [],
-				})
-			);
+			if (action.payload.isLoginRemember) {
+				localStorage.setItem(
+					currentUser,
+					JSON.stringify({
+						...action.payload.user,
+						followers: [],
+						following: [],
+					})
+				);
+			}
 		});
 	},
 });

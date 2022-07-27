@@ -15,6 +15,7 @@ import Bookmarks from "./frontend/components/Bookmarks/Bookmarks";
 import SinglePost from "./frontend/features/SinglePost/SinglePost";
 import TrendingPosts from "./frontend/components/TrendingPosts/TrendingPosts";
 import PersonalizedPosts from "./frontend/components/PersonalizedPosts/PersonalizedPosts";
+import Auth from "./frontend/components/Auth/Auth";
 
 function App() {
 	return (
@@ -28,7 +29,6 @@ function App() {
 					}
 				>
 					<Route path="/feed" element={<Feed />}>
-						<Route index element={<NewPosts />} />
 						<Route path="new" element={<NewPosts />} />
 						<Route path="trending" element={<TrendingPosts />} />
 						<Route path="personalized" element={<PersonalizedPosts />} />
@@ -40,10 +40,12 @@ function App() {
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/user/:userId" element={<Profile />} />
 				</Route>
-				<Route path="login" element={<Login />} />
-				<Route path="signup" element={<SignUp />} />
+				<Route element={<Auth />}>
+					<Route path="login" element={<Login />} />
+					<Route path="signup" element={<SignUp />} />
+					<Route path="/" element={<Home />} />
+				</Route>
 				<Route path="mock" element={<MockAPI />} />
-				<Route path="/" element={<Home />} />
 				<Route path="*" />
 			</Routes>
 			<Post />
