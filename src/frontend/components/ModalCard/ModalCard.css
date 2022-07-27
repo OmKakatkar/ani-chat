@@ -6,6 +6,7 @@
 	height: auto;
 	z-index: 10;
 	align-items: flex-start;
+	cursor: pointer;
 }
 
 .modal-card.top-right {

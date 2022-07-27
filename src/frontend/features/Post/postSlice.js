@@ -15,6 +15,7 @@ import {
 const initialState = {
 	allPosts: [],
 	userPosts: [],
+	isLoading: false,
 };
 
 // Post CRUD
@@ -133,39 +134,79 @@ const postSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
+		builder.addCase(handleCreatePost.pending, (state) => {
+			state.isLoading = true;
+		});
+
 		builder.addCase(handleCreatePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
+			state.isLoading = false;
+		});
+
+		builder.addCase(handleGetAllPosts.pending, (state) => {
+			state.isLoading = true;
 		});
 
 		builder.addCase(handleGetAllPosts.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
+			state.isLoading = false;
+		});
+
+		builder.addCase(handleDeletePost.pending, (state) => {
+			state.isLoading = true;
 		});
 
 		builder.addCase(handleDeletePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
+			state.isLoading = false;
+		});
+
+		builder.addCase(handleEditPost.pending, (state) => {
+			state.isLoading = true;
 		});
 
 		builder.addCase(handleEditPost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
+			state.isLoading = false;
+		});
+
+		builder.addCase(handleLikePost.pending, (state) => {
+			state.isLoading = true;
 		});
 
 		builder.addCase(handleLikePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
+			state.isLoading = false;
+		});
+
+		builder.addCase(handleUnlikePost.pending, (state) => {
+			state.isLoading = true;
 		});
 
 		builder.addCase(handleUnlikePost.fulfilled, (state, action) => {
 			state.allPosts = action.payload;
+			state.isLoading = false;
+		});
+
+		builder.addCase(handleAddComment.pending, (state) => {
+			state.isLoading = true;
 		});
 
 		builder.addCase(handleAddComment.fulfilled, (state, action) => {
+			state.isLoading = false;
 			state.allPosts = state.allPosts.map((post) =>
 				post._id === action.payload.postId
 					? { ...post, comments: [...action.payload.comments] }
 					: { ...post }
 			);
+		});
+
+		builder.addCase(handleDeleteComment.pending, (state) => {
+			state.isLoading = true;
 		});
 
 		builder.addCase(handleDeleteComment.fulfilled, (state, action) => {
+			state.isLoading = false;
 			state.allPosts = state.allPosts.map((post) =>
 				post._id === action.payload.postId
 					? { ...post, comments: [...action.payload.comments] }
@@ -173,7 +214,12 @@ const postSlice = createSlice({
 			);
 		});
 
+		builder.addCase(handleEditComment.pending, (state) => {
+			state.isLoading = true;
+		});
+
 		builder.addCase(handleEditComment.fulfilled, (state, action) => {
+			state.isLoading = false;
 			state.allPosts = state.allPosts.map((post) =>
 				post._id === action.payload.postId
 					? { ...post, comments: [...action.payload.comments] }

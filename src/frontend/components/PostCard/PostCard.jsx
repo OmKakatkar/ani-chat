@@ -31,6 +31,7 @@ import "./PostCard.css";
 function PostCard({ post }) {
 	const dispatch = useDispatch();
 	const { user, token } = useSelector((store) => store.auth);
+	const { isLoading } = useSelector((store) => store.post);
 	const { triggerRef, nodeRef, showItem } = useDetectClickOutside();
 	const isBookMark = checkItemInArray(user.bookmarks, post);
 	const isLiked = checkItemInArray(post.likes.likedBy, user);
@@ -39,7 +40,7 @@ function PostCard({ post }) {
 	return (
 		<article className="card post-card">
 			{post.username === user.username && (
-				<button ref={triggerRef}>
+				<button ref={triggerRef} disabled={isLoading}>
 					<FontAwesomeIcon
 						icon={faEllipsisVertical}
 						className="icon card-menu"
@@ -63,6 +64,7 @@ function PostCard({ post }) {
 					<span className="button-wrapper">
 						{isLiked ? (
 							<button
+								disabled={isLoading}
 								onClick={() =>
 									dispatch(handleUnlikePost({ postId: post._id, token }))
 								}
@@ -74,6 +76,7 @@ function PostCard({ post }) {
 							</button>
 						) : (
 							<button
+								disabled={isLoading}
 								onClick={() =>
 									dispatch(handleLikePost({ postId: post._id, token }))
 								}
@@ -85,6 +88,7 @@ function PostCard({ post }) {
 					</span>
 					{isBookMark ? (
 						<button
+							disabled={isLoading}
 							onClick={() =>
 								dispatch(handleRemoveBookmark({ postId: post._id, token }))
 							}
@@ -96,6 +100,7 @@ function PostCard({ post }) {
 						</button>
 					) : (
 						<button
+							disabled={isLoading}
 							onClick={() =>
 								dispatch(handleAddBookmark({ postId: post._id, token }))
 							}
@@ -109,6 +114,7 @@ function PostCard({ post }) {
 						</Link>
 					)}
 					<button
+						disabled={isLoading}
 						onClick={() => {
 							navigator.clipboard.writeText(
 								`https://ani-chat.netlify.app/post/${post._id}`

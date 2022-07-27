@@ -67,20 +67,24 @@ function Header() {
 					onChange={(e) => setSearchUser(e.target.value)}
 					ref={triggerRef}
 				/>
-				{foundUsers.length > 0 && showItem && (
+				{searchUser !== "" && showItem && (
 					<ModalCard position="bottom-center" ref={nodeRef}>
-						{foundUsers.map((userData) => (
-							<div className="user-info search-user" key={userData._id}>
-								<Link to={`/user/${userData._id}`}>
-									<div className="avatar">
-										<img src={userData.image} alt={userData.username} />
-									</div>
-									<div>
-										<h4 className="text-md text-white">{`${userData.firstName} ${userData.lastName}`}</h4>
-									</div>
-								</Link>
-							</div>
-						))}
+						{foundUsers.length > 0 ? (
+							foundUsers.map((userData) => (
+								<div className="user-info search-user" key={userData._id}>
+									<Link to={`/user/${userData._id}`}>
+										<div className="avatar">
+											<img src={userData.image} alt={userData.username} />
+										</div>
+										<div>
+											<h4 className="text-md text-white">{`${userData.firstName} ${userData.lastName}`}</h4>
+										</div>
+									</Link>
+								</div>
+							))
+						) : (
+							<div className="users-not-found">No Users found</div>
+						)}
 					</ModalCard>
 				)}
 			</div>

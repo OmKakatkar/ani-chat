@@ -88,3 +88,7 @@ a.active {
 	margin: 0;
 	padding: 0;
 }
+
+.users-not-found {
+	cursor: auto;
+}

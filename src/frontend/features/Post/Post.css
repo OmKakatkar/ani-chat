@@ -3,6 +3,7 @@
 	background-color: var(--clr-overlay);
 	z-index: 10;
 	inset: 0;
+	cursor: pointer;
 }
 
 .post-form textarea{

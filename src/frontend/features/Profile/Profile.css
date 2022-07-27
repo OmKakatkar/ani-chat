@@ -11,3 +11,8 @@
 .image {
 	margin: auto;
 }
+
+.profile-center {
+	top: 50%;
+	transform: translateY(-50%);
+}
