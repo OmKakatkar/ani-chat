@@ -3,7 +3,6 @@ import PostCard from "../PostCard/PostCard";
 
 function UserPosts({ userName }) {
 	const { allPosts } = useSelector((store) => store.post);
-	console.log(userName);
 	const userPosts = allPosts.filter((post) => post.username === userName);
 
 	return (

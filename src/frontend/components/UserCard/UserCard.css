@@ -10,7 +10,7 @@
 
 .user-card img {
 	height: 100%;
-	max-inline-size: initial;
+	max-inline-size: fit-content;
 }
 
 .user-follow {
