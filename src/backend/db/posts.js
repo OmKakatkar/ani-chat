@@ -1,5 +1,3 @@
-import { formatDate } from "../utils/authUtils";
-
 /**
  * Posts can be added here.
  * You can add default posts of your wish with different attributes
@@ -26,8 +24,8 @@ export const posts = [
 		username: "okabe22",
 		userImage:
 			"https://res.cloudinary.com/dwubqdebj/image/upload/v1658253776/ani-chat/latest_mgcj1h.jpg",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
+		createdAt: "Jul 27, 2022 2:08 PM",
+		updatedAt: "Jul 27, 2022 2:08 PM",
 		comments: [
 			{
 				_id: "bb13231a-572b-42dc-a2d9-e4ea3fasdasdsa",
@@ -39,8 +37,8 @@ export const posts = [
 					upvotedBy: [],
 					downvotedBy: [],
 				},
-				createdAt: formatDate(),
-				updatedAt: formatDate(),
+				createdAt: "Jul 27, 2022 2:20 PM",
+				updatedAt: "Jul 27, 2022 2:20 PM",
 			},
 			{
 				_id: "bb13231a-572b-42dc-a2d9-e4ytjytythdsa",
@@ -52,8 +50,8 @@ export const posts = [
 					upvotedBy: [],
 					downvotedBy: [],
 				},
-				createdAt: formatDate(),
-				updatedAt: formatDate(),
+				createdAt: "Jul 27, 2022 3:33 PM",
+				updatedAt: "Jul 27, 2022 3:33 PM",
 			},
 		],
 	},
@@ -81,8 +79,8 @@ export const posts = [
 		username: "itachi22",
 		userImage:
 			"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254224/ani-chat/300_pk56x9.png",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
+		createdAt: "Jul 25, 2022 1:08 AM",
+		updatedAt: "Jul 25, 2022 1:08 AM",
 		comments: [
 			{
 				_id: "bb13231a-572b-42dc-a2d9-easdsaasdsa",
@@ -94,8 +92,8 @@ export const posts = [
 					upvotedBy: [],
 					downvotedBy: [],
 				},
-				createdAt: formatDate(),
-				updatedAt: formatDate(),
+				createdAt: "Jul 25, 2022 12:08 PM",
+				updatedAt: "Jul 26, 2022 2:08 AM",
 			},
 		],
 	},
@@ -120,8 +118,8 @@ export const posts = [
 		username: "hachi_8",
 		userImage:
 			"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254072/ani-chat/350_e196i1.jpg",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
+		createdAt: "Mar 27, 2022 5:24 PM",
+		updatedAt: "Mar 27, 2022 5:24 PM",
 		comments: [
 			{
 				_id: "bb13231a-572b-42dc-a2d9-e4asdsasaas71",
@@ -133,15 +131,15 @@ export const posts = [
 					upvotedBy: [],
 					downvotedBy: [],
 				},
-				createdAt: formatDate(),
-				updatedAt: formatDate(),
+				createdAt: "Mar 30, 2022 2:08 PM",
+				updatedAt: "Mar 30, 2022 2:08 PM",
 			},
 		],
 	},
 	{
 		_id: "aa13231a-572b-42dc-a2d9-e4ea3fb68b74",
 		content:
-			"I’ve only lived 18 years, but I don’t want to change any of them. They’re all part of my life, even the failures.",
+			"I’ve only lived 18 years, but I don't want to change any of them. They're all part of my life, even the failures.",
 		likes: {
 			likeCount: 3,
 			likedBy: [
@@ -163,8 +161,8 @@ export const posts = [
 		username: "kurisu12",
 		userImage:
 			"https://res.cloudinary.com/dwubqdebj/image/upload/v1658254295/ani-chat/350_qcdv4a.jpg",
-		createdAt: formatDate(),
-		updatedAt: formatDate(),
+		createdAt: "Jun 04, 2022 6:41 AM",
+		updatedAt: "Jun 04, 2022 6:08 PM",
 		comments: [],
 	},
 ];
