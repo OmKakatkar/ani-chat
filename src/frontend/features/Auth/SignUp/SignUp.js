@@ -15,6 +15,10 @@ function SignUp() {
 		lastName: "",
 		username: "",
 		password: "",
+		image:
+			"https://res.cloudinary.com/dwubqdebj/image/upload/v1659704561/ani-chat/blank-profile-picture-973460__340_xh79yu.webp",
+		bio: "New User",
+		site: "https://ani-chat.netlify.app",
 	};
 	const [signUpData, setSignUpData] = useState(initialSignUpData);
 	const [acceptTnC, setAcceptTnC] = useState(false);
@@ -30,7 +34,8 @@ function SignUp() {
 	};
 
 	const handleGuestSignUp = () => {
-		setSignUpData(TEST_USER_SIGNUP);
+		setSignUpData({ ...signUpData, ...TEST_USER_SIGNUP });
+		setAcceptTnC(true);
 	};
 
 	return (

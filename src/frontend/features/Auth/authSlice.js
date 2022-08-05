@@ -32,14 +32,11 @@ export const handleLogin = createAsyncThunk(
 
 export const handleSignUp = createAsyncThunk(
 	"auth/handleSignUp",
-	async ({ firstName, lastName, username, password }) => {
+	async (signUpData) => {
 		try {
-			const { createdUser: user, encodedToken: token } = await signup({
-				firstName,
-				lastName,
-				username,
-				password,
-			});
+			const { createdUser: user, encodedToken: token } = await signup(
+				signUpData
+			);
 			return { user, token, isLoginRemember: true };
 		} catch (err) {
 			console.error(err);

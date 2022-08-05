@@ -1,5 +1,7 @@
 import axios from "axios";
 import { API_LIKE, API_UNLIKE } from "../constants/api-constant";
+import { success } from "../constants/toast-constants";
+import { notify } from "../utils/notify";
 
 /**
  * Add Like
@@ -16,6 +18,7 @@ export const addLike = async ({ postId, token }) => {
 				},
 			}
 		);
+		notify(success, "Post liked");
 		return data;
 	} catch (err) {
 		console.error(err);
@@ -37,6 +40,7 @@ export const removeLike = async ({ postId, token }) => {
 				},
 			}
 		);
+		notify(success, "Post unliked");
 		return data;
 	} catch (err) {
 		console.error(err);

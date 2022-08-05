@@ -59,7 +59,7 @@ export const addPostCommentHandler = function (schema, request) {
       updatedAt: formatDate(),
     };
     const post = schema.posts.findBy({ _id: postId }).attrs;
-    post.comments.push(comment);
+    post.comments.unshift(comment);
     this.db.posts.update({ _id: postId }, post);
     return new Response(201, {}, { comments: post.comments });
   } catch (error) {

@@ -4,6 +4,8 @@ import {
 	API_COMMENT_DELETE,
 	API_COMMENT_EDIT,
 } from "../constants/api-constant";
+import { success } from "../constants/toast-constants";
+import { notify } from "../utils/notify";
 
 /**
  * Post a comment
@@ -20,6 +22,7 @@ export const addComment = async ({ postId, commentData, token }) => {
 				},
 			}
 		);
+		notify(success, "Comment Added");
 		return data;
 	} catch (err) {
 		console.error(err);
@@ -41,6 +44,7 @@ export const deleteComment = async ({ postId, commentId, token }) => {
 				},
 			}
 		);
+		notify(success, "Comment Deleted");
 		return data;
 	} catch (err) {
 		console.error(err);
@@ -62,6 +66,7 @@ export const editComment = async ({ postId, commentData, token }) => {
 				},
 			}
 		);
+		notify(success, "Comment Updated");
 		return data;
 	} catch (err) {
 		console.error(err);
