@@ -19,23 +19,30 @@ function CommentBox({ postId, commentData, isEditing, setIsEditing }) {
 		e.preventDefault();
 		if (comment !== "") {
 			if (isEditing) {
-				dispatch(
-					handleEditComment({
-						postId,
-						commentData: { ...commentData, text: comment },
-						token,
-					})
-				);
+				if (comment !== commentData.text) {
+					dispatch(
+						handleEditComment({
+							postId,
+							commentData: { ...commentData, text: comment.trim() },
+							token,
+						})
+					);
+				}
 				setComment("");
 				setIsEditing(false);
 			} else {
 				dispatch(
-					handleAddComment({ postId, commentData: { text: comment }, token })
+					handleAddComment({
+						postId,
+						commentData: { text: comment.trim() },
+						token,
+					})
 				);
 				setComment("");
 			}
+		} else {
+			notify(error, "Comment cannot be empty");
 		}
-		notify(error, "Comment cannot be empty");
 	};
 
 	return (

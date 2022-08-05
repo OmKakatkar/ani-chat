@@ -4,6 +4,7 @@ import {
 	addUnFollowUser,
 	getAllUsers,
 } from "../../services/user.service";
+import { updateCurrentUser } from "../Auth/authSlice";
 
 const initialState = {
 	allUsers: [],
@@ -23,10 +24,10 @@ export const handleGetAllUsers = createAsyncThunk(
 
 export const handleFollowUser = createAsyncThunk(
 	"users/handleFollowUser",
-	async ({ id, token, dispatch, handleProfileUpdate }) => {
+	async ({ id, token, dispatch }) => {
 		try {
 			const { user, followUser } = await addFollowUser({ id, token });
-			dispatch(handleProfileUpdate({ user, token }));
+			dispatch(updateCurrentUser(user));
 			return { followUser };
 		} catch (err) {
 			console.error(err);
@@ -36,10 +37,10 @@ export const handleFollowUser = createAsyncThunk(
 
 export const handleUnFollowUser = createAsyncThunk(
 	"users/handleUnFollowUser",
-	async ({ id, token, dispatch, handleProfileUpdate }) => {
+	async ({ id, token, dispatch }) => {
 		try {
 			const { user, followUser } = await addUnFollowUser({ id, token });
-			dispatch(handleProfileUpdate({ user, token }));
+			dispatch(updateCurrentUser(user));
 			return { followUser };
 		} catch (err) {
 			console.error(err);

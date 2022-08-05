@@ -83,7 +83,7 @@ function Login() {
 					className="btn rounded bd-blue"
 					onClick={handleGuestLogin}
 				>
-					Guest Login
+					Fill Guest Credentials
 				</button>
 				<div className="text-center">
 					<Link to="/signup" className="form-link">

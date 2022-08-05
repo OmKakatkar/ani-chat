@@ -105,6 +105,21 @@ const authSlice = createSlice({
 			state.token = "";
 			state.remeberStatus = false;
 		},
+
+		updateCurrentUser: (state, action) => {
+			state.user = action.payload;
+			delete action.payload.password;
+			if (state.isLoginRemember) {
+				localStorage.setItem(
+					currentUser,
+					JSON.stringify({
+						...action.payload,
+						followers: [],
+						following: [],
+					})
+				);
+			}
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(handleLogin.fulfilled, (state, action) => {
@@ -202,5 +217,5 @@ const authSlice = createSlice({
 	},
 });
 
-export const { handleLogout } = authSlice.actions;
+export const { handleLogout, updateCurrentUser } = authSlice.actions;
 export default authSlice.reducer;

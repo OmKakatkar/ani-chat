@@ -7,7 +7,6 @@ import {
 	handleFollowUser,
 	handleUnFollowUser,
 } from "../../features/Profile/userSlice";
-import { handleProfileUpdate } from "../../features/Auth/authSlice";
 import "./SideBar.css";
 
 function SideBarRight() {
@@ -43,7 +42,6 @@ function SideBarRight() {
 												id: currUser._id,
 												token,
 												dispatch,
-												handleProfileUpdate,
 											})
 										);
 									}}
@@ -69,7 +67,6 @@ function SideBarRight() {
 												id: currUser._id,
 												token,
 												dispatch,
-												handleProfileUpdate,
 											})
 										);
 									}}

@@ -37,15 +37,27 @@ function Post() {
 		e.preventDefault();
 		if (postData.content !== "") {
 			if (modalData === null) {
-				dispatch(handleCreatePost({ postData, token }));
+				dispatch(
+					handleCreatePost({
+						postData: { content: postData.content.trim() },
+						token,
+					})
+				);
 			} else {
 				dispatch(
-					handleEditPost({ postData: { ...modalData, ...postData }, token })
+					handleEditPost({
+						postData: {
+							...modalData,
+							...postData,
+							content: postData.content.trim(),
+						},
+						token,
+					})
 				);
 			}
 			reset();
 		} else {
-			notify(error, 'Post cannot be empty')
+			notify(error, "Post cannot be empty");
 		}
 	};
 
