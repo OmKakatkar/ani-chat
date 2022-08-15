@@ -2,10 +2,12 @@ import { faMultiply, faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { error } from "../../constants/toast-constants";
 import {
 	handleAddComment,
 	handleEditComment,
 } from "../../features/Post/postSlice";
+import { notify } from "../../utils/notify";
 import "./CommentBox.css";
 
 function CommentBox({ postId, commentData, isEditing, setIsEditing }) {
@@ -15,21 +17,31 @@ function CommentBox({ postId, commentData, isEditing, setIsEditing }) {
 
 	const submitComment = (e) => {
 		e.preventDefault();
-		if (isEditing) {
-			dispatch(
-				handleEditComment({
-					postId,
-					commentData: { ...commentData, text: comment },
-					token,
-				})
-			);
-			setComment("");
-			setIsEditing(false);
+		if (comment !== "") {
+			if (isEditing) {
+				if (comment !== commentData.text) {
+					dispatch(
+						handleEditComment({
+							postId,
+							commentData: { ...commentData, text: comment.trim() },
+							token,
+						})
+					);
+				}
+				setComment("");
+				setIsEditing(false);
+			} else {
+				dispatch(
+					handleAddComment({
+						postId,
+						commentData: { text: comment.trim() },
+						token,
+					})
+				);
+				setComment("");
+			}
 		} else {
-			dispatch(
-				handleAddComment({ postId, commentData: { text: comment }, token })
-			);
-			setComment("");
+			notify(error, "Comment cannot be empty");
 		}
 	};
 

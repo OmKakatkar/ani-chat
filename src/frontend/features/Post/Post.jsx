@@ -5,6 +5,8 @@ import { closePostModal } from "./postModalSlice";
 import "./Post.css";
 import ModalCard from "../../components/ModalCard/ModalCard";
 import useDetectClickOutside from "../../hooks/useDetectClickOutside";
+import { notify } from "../../utils/notify";
+import { error } from "../../constants/toast-constants";
 
 function Post() {
 	const dispatch = useDispatch();
@@ -33,14 +35,30 @@ function Post() {
 
 	const handlePostSubmit = (e) => {
 		e.preventDefault();
-		if (modalData === null) {
-			dispatch(handleCreatePost({ postData, token }));
+		if (postData.content !== "") {
+			if (modalData === null) {
+				dispatch(
+					handleCreatePost({
+						postData: { content: postData.content.trim() },
+						token,
+					})
+				);
+			} else {
+				dispatch(
+					handleEditPost({
+						postData: {
+							...modalData,
+							...postData,
+							content: postData.content.trim(),
+						},
+						token,
+					})
+				);
+			}
+			reset();
 		} else {
-			dispatch(
-				handleEditPost({ postData: { ...modalData, ...postData }, token })
-			);
+			notify(error, "Post cannot be empty");
 		}
-		reset();
 	};
 
 	return (

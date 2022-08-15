@@ -1,5 +1,7 @@
 import axios from "axios";
 import { API_BOOKMARK, API_REMOVE_BOOKMARK } from "../constants/api-constant";
+import { success } from "../constants/toast-constants";
+import { notify } from "../utils/notify";
 
 /**
  * Add to bookmark
@@ -16,6 +18,7 @@ export const addBookmark = async ({ postId, token }) => {
 				},
 			}
 		);
+		notify(success, "Post bookmarked");
 		return data;
 	} catch (err) {
 		console.error(err);
@@ -37,6 +40,7 @@ export const removeBookmark = async ({ postId, token }) => {
 				},
 			}
 		);
+		notify(success, "Removed from Bookmarks");
 		return data;
 	} catch (err) {
 		console.error(err);

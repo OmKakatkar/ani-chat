@@ -1,5 +1,7 @@
 import axios from "axios";
 import { API_FOLLOW, API_UNFOLLOW, API_USERS } from "../constants/api-constant";
+import { success } from "../constants/toast-constants";
+import { notify } from "../utils/notify";
 
 /**
  * Login the user if username and password are correct
@@ -29,6 +31,7 @@ export const addFollowUser = async ({ id, token }) => {
 				},
 			}
 		);
+		notify(success, "User Followed");
 		return data;
 	} catch (err) {
 		console.error(err);
@@ -50,6 +53,7 @@ export const addUnFollowUser = async ({ id, token }) => {
 				},
 			}
 		);
+		notify(success, "User Unfollowed");
 		return data;
 	} catch (err) {
 		console.error(err);

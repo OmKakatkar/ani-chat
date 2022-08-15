@@ -1,5 +1,7 @@
 import axios from "axios";
 import { API_POST, API_POST_EDIT } from "../constants/api-constant";
+import { notify } from "../utils/notify";
+import { success } from "../constants/toast-constants";
 
 /**
  * Create a new post
@@ -16,6 +18,7 @@ export const createPost = async ({ postData, token }) => {
 				},
 			}
 		);
+		notify(success, "Post Created");
 		return data;
 	} catch (err) {
 		console.error(err);
@@ -46,6 +49,7 @@ export const deletePost = async ({ postId, token }) => {
 				authorization: token,
 			},
 		});
+		notify(success, "Post Deleted");
 		return data;
 	} catch (err) {
 		console.error(err);
@@ -67,6 +71,7 @@ export const editPost = async ({ postData, token }) => {
 				},
 			}
 		);
+		notify(success, "Post Edited");
 		return data;
 	} catch (err) {
 		console.error(err);

@@ -32,14 +32,11 @@ export const handleLogin = createAsyncThunk(
 
 export const handleSignUp = createAsyncThunk(
 	"auth/handleSignUp",
-	async ({ firstName, lastName, username, password }) => {
+	async (signUpData) => {
 		try {
-			const { createdUser: user, encodedToken: token } = await signup({
-				firstName,
-				lastName,
-				username,
-				password,
-			});
+			const { createdUser: user, encodedToken: token } = await signup(
+				signUpData
+			);
 			return { user, token, isLoginRemember: true };
 		} catch (err) {
 			console.error(err);
@@ -107,6 +104,21 @@ const authSlice = createSlice({
 			state.user = {};
 			state.token = "";
 			state.remeberStatus = false;
+		},
+
+		updateCurrentUser: (state, action) => {
+			state.user = action.payload;
+			delete action.payload.password;
+			if (state.isLoginRemember) {
+				localStorage.setItem(
+					currentUser,
+					JSON.stringify({
+						...action.payload,
+						followers: [],
+						following: [],
+					})
+				);
+			}
 		},
 	},
 	extraReducers: (builder) => {
@@ -205,5 +217,5 @@ const authSlice = createSlice({
 	},
 });
 
-export const { handleLogout } = authSlice.actions;
+export const { handleLogout, updateCurrentUser } = authSlice.actions;
 export default authSlice.reducer;

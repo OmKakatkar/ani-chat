@@ -1,5 +1,9 @@
 import axios from "axios";
-import { API_LOGIN, API_SIGNUP, API_USER_EDIT } from "../constants/api-constant";
+import {
+	API_LOGIN,
+	API_SIGNUP,
+	API_USER_EDIT,
+} from "../constants/api-constant";
 import { notify } from "../utils/notify";
 import { error, success } from "../constants/toast-constants";
 
@@ -36,14 +40,10 @@ export const login = async ({ username, password }) => {
  * @param {string} password
  * @return user
  */
-export const signup = async ({ firstName, lastName, username, password }) => {
+export const signup = async (signUpData) => {
+	console.log(signUpData);
 	try {
-		const { data } = await axios.post(API_SIGNUP, {
-			firstName,
-			lastName,
-			username,
-			password,
-		});
+		const { data } = await axios.post(API_SIGNUP, signUpData);
 		notify(success, "SignUp Successful!");
 		return data;
 	} catch (err) {
@@ -61,7 +61,7 @@ export const signup = async ({ firstName, lastName, username, password }) => {
  * Login the user if username and password are correct
  * @return user
  */
- export const updateProfile = async ({ userData, token }) => {
+export const updateProfile = async ({ userData, token }) => {
 	try {
 		const { data } = await axios.post(
 			API_USER_EDIT,
